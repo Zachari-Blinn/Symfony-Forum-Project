@@ -1,0 +1,146 @@
+@import "~bootstrap";
+
+/* body */
+body {
+    background-color: #16161a;
+    font-family: Arial;
+}
+
+#navigation{
+    background: #38383b;
+    height: 50px;
+    width:100%;
+}
+
+.fixNavigation{
+    z-index: 9999;
+    position: fixed;
+    top: 0;
+    /* Mise en forme */
+    width:100%;
+}
+
+.example-wrapper { margin: 1em auto; max-width: 1100px; width: 95%; font: 18px/1.5 sans-serif; }
+.example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+
+/* titre */
+h3 {
+    color: #fffffe;
+}
+
+/* paragraphe */
+p {
+    color: #94a1b2;
+}
+
+/* card */
+#card {
+    background-color: #242629;
+    color: #94a1b2;
+}
+
+/* button valider */
+#btn-success {
+    background-color: #00473e;
+    color: #ffffff;
+}
+
+#btn-success:hover {
+    background-color: #01423a;
+    color: #ffffff;
+}
+
+/* button editer */
+#btn-warning {
+    background-color: #dda249;
+    color: #001e1d;
+}
+
+#btn-warning:hover {
+    background-color: #cf953e;
+    color: white;
+}
+
+/* button danger */
+#btn-danger {
+    background-color: #c44b3b;
+    color: white;
+}
+
+#btn-danger:hover {
+    background-color: #b83e2e;
+    color: white;
+}
+
+/* btn info */
+#btn-info {
+    background-color: #3da9fc;
+    color: white;
+}
+
+/* btn back */
+#btn-back {
+    background-color: #72757e;
+    color: white;
+}
+
+#btn-back:hover {
+    background-color: #67696e;
+    color: white;
+}
+
+#btn-moderator {
+    background-color: #7f5af0;
+    color: white;
+}
+
+/* alert danger */
+.alert-danger {
+    background-color: #c44b3b;
+    color: #ffffff;
+    border: none;
+}
+
+/* alert success */
+.alert-success {
+    background-color: #01423a;
+    color: #ffffff;
+    border: none;
+}
+
+/* alert info */
+.alert-info {
+    background-color: #3da9fc;
+    color: #ffffff;
+    border: none;
+}
+
+/* icon */
+i {
+    color: #ffffff;
+}
+
+/* circle button */
+.btn-circle { 
+    width: 40px; 
+    height: 40px; 
+    padding: 6px 0px;
+    border-radius: 25px; 
+    text-align: center; 
+} 
+
+.form-control {
+    background-color: #16161a;
+    border: none;
+    color: white;
+}
+
+.form-control:focus {
+    background-color: #16161a;
+    border: none;
+    color: white;
+}
+
+label {
+    color: white;
+}

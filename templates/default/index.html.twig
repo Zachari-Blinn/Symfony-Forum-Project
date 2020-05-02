@@ -1,0 +1,141 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello DefaultController!{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <!-- first -->
+        <div class="col-md-3 pl-5">
+            <div id="card" class="card shadow mb-3">
+                <div class="card-body">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum nisi non repudiandae fugiat aspernatur exercitationem voluptatem voluptate quae, facere veniam? Quisquam eos dignissimos deleniti nulla architecto hic possimus autem exercitationem.</p>
+                </div>
+            </div>
+        </div>
+        <!-- end first -->
+
+        <!-- middle -->
+        <div class="col-md-6">
+            {% for forum in forums %}
+                <div id="card" class="card shadow mb-3">
+                    <div class="card-body">
+                        <span class="float-left"><h3 class="card-title">{{forum.title}}</h3></span>
+                        <span class="float-right">
+                            <a id="btn-warning" type="button" class="btn btn-circle" href="{{ path('forum_edit', {'slug': forum.slug}) }}"><i class="fas fa-wrench"></i></a>
+                            <a id="btn-success" type="button" class="btn btn-circle" href="{{ path('category_new', {'forum': forum.id}) }}"><i class="fas fa-plus"></i></a>
+                        </span>
+                        {% if forum.description is defined and forum.description is not null %}
+                            <br>
+                            <br>
+                            <p class="card-text">{{ forum.description|striptags|u.truncate(55, true)|raw }}</p>
+                        {% endif %}
+                    </div>
+                    <table class="table table-hover">
+                        <tbody>
+                            {% for category in forum.category %}
+                                <tr>
+                                    <div class="container">
+                                        <div class="row">
+                                            <th scope="row"><i class="far fa-bookmark"></i></th>
+                                            <td class="col-6">
+                                                <p>{{ category.title }}</p>
+                                                </n>
+                                                {% if category.description is defined and category.description is not null %}
+                                                    <p>{{ category.description|striptags|u.truncate(55, true)|raw }}</p>
+                                                {% endif %}
+                                            </td>
+                                            <td class="col-2"><p class="text-center font-weight-bold">18</p> </n> <p class="text-center font-weight-light">sujets</p></td>
+                                            <td class="col-2"><p class="text-center font-weight-bold">24</p> </n> <p class="text-center font-weight-light">messages</p></td>
+                                            <td class="col-4">test</td>
+                                        </div>
+                                    </div>
+                                </tr>
+                            {% else %}
+                                <div class="alert alert-danger m-3" role="alert">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    Aucune donnée
+                                </div>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="alert alert-danger" role="alert">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    Aucune donnée
+                    <button style="color: white;" type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            {% endfor %}
+            <button id="btn-success" type="button" class="btn float-right"><i class="fas fa-plus"></i> Forum</button>
+            <br>
+            <br>
+
+            <!-- test -->
+            <div id="card" class="shadow p-3 mb-5 rounded">
+                <h3>Lorem ipsum</h3>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione pariatur iusto, voluptas neque reprehenderit perspiciatis exercitationem harum placeat saepe ipsum itaque nesciunt aliquam consectetur. Omnis sed nemo doloribus facilis autem!</p>
+            </div>
+
+            <button id="btn-success" type="button" class="btn"><i class="fas fa-check"></i> Confirmer</button>
+            <button id="btn-danger" type="button" class="btn"><i class="fas fa-check"></i> Confirmer</button>
+
+            <button id="btn-warning" type="button" class="btn btn-circle"><i class="fas fa-wrench"></i></button>
+            <button id="btn-danger" type="button" class="btn btn-circle"><i class="fas fa-trash-alt"></i></button>
+            <button id="btn-info" type="button" class="btn btn-circle"><i class="fas fa-eye"></i></button>
+            <button id="btn-moderator" type="button" class="btn btn-circle"><i class="fas fa-balance-scale"></i></button>
+            <button id="btn-success" type="button" class="btn btn-circle"><i class="fas fa-plus"></i></button>
+
+            <br><br>
+
+            <div id="card" class="card shadow mb-3">
+                <div class="card-body">
+                <h3 class="card-title">Lorem ipsum</h3>
+                <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui, culpa atque quisquam illum nemo sapiente, soluta nostrum quidem excepturi, similique molestiae recusandae. Dicta velit placeat ex repudiandae, harum quia suscipit?</p>
+                </div>
+
+                <table id="card" class="table">
+                    <tbody>
+                    <tr>
+                        <th scope="row"><i class="far fa-bookmark"></i></th>
+                        <td>Mark</td>
+                        <td>Otto</td>
+                        <td>mdo</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><i class="far fa-bookmark"></i></th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>fat</td>
+                    </tr>
+                    <tr>
+                        <th scope="row"><i class="far fa-bookmark"></i></th>
+                        <td>Otto</td>
+                        <td>Otto</td>
+                        <td>mdo</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="alert alert-success" role="alert">
+                <i class="fas fa-check"></i> Victoire
+            </div>
+        </div>
+        <!-- end test -->
+        <!-- end middle -->
+
+        <!-- last -->
+        <div class="col-md-3">
+            <iframe src="https://discordapp.com/widget?id=520613107366887434&theme=dark" width="400" height="400" allowtransparency="true" frameborder="0"></iframe>
+        </div>
+        <!-- end last -->
+    </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script></script>
+{% endblock %}
