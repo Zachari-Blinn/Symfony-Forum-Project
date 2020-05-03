@@ -37,7 +37,7 @@ class TopicController extends AbstractController
             $entityManager->persist($topic);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Topic créée avec succes !');
+            // $this->addFlash('success', 'Topic créée avec succes !');
 
             return $this->redirectToRoute('default');
         }
@@ -65,7 +65,7 @@ class TopicController extends AbstractController
             $entityManager->persist($comment);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Commentaire créée avec succes !');
+            // $this->addFlash('success', 'Commentaire créée avec succes !');
 
             return $this->redirectToRoute('topic_show', [
                 'id' => $topic->getId(),
