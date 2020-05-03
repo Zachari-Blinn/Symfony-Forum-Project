@@ -12,8 +12,6 @@ import $ from 'jquery';
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 // import $ from 'jquery';
 
-console.log('Bonjour !');
-
 $(function(){
     // On recupere la position du bloc par rapport au haut du site
     var position_top_raccourci = $("#navigation").offset().top;

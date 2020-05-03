@@ -2,10 +2,11 @@
 
 namespace App\Controller;
 
-use App\Repository\ForumRepository;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
+use App\Repository\ForumRepository;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class DefaultController extends AbstractController
 {
@@ -17,6 +18,14 @@ class DefaultController extends AbstractController
         return $this->render('default/index.html.twig', [
             'forums' => $forumRepository->findAll()
         ]);
+    }
+
+    /**
+     * @Route("/admin")
+     */
+    public function admin()
+    {
+        return new Response('<html><body>Admin page!</body></html>');
     }
 
 }
