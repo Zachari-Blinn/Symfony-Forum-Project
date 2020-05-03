@@ -10,9 +10,10 @@
     </head>
     <body>
         <header>
-            <div class="container">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Numquam, quo earum corrupti molestiae necessitatibus iste repellat nobis et. Alias aut quisquam, voluptatem fugiat debitis soluta magnam error aperiam. Consectetur, aut!</p>
-            </div>
+            <div id="jumbotron-header" class="jumbotron text-center jumbotron-fluid">
+                <!-- <h1>My First Bootstrap Page</h1>
+                <p>Resize this responsive page to see the effect!</p> -->
+             </div>
         </header>
         <nav id="navigation">
             <div class="container">
@@ -44,8 +45,13 @@
             {% endfor %}
         {% endfor %}
         {% block body %}{% endblock %}
+        <footer>
+            <!-- <div class="jumbotron jumbotron-fluid">
+
+            </div> -->
+        </footer>
         {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
+            {{ encore_entry_script_tags('app') }}
         {% endblock %}
     </body>
 </html>

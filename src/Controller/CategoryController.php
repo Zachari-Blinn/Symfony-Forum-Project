@@ -16,18 +16,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/category/{id}", name="category")
+     * @Route("/category/{slug}", name="category")
      */
     public function index(Category $category, TopicRepository $topicRepository)
     {
-        //on recup tous les sujets de la categorie
-        $topics = $topicRepository->findAll([
-            'id' => $category->getId()
-        ]);
-
         return $this->render('category/index.html.twig', [
             'category' => $category,
-            'topics' => $topics
         ]);
     }
 
@@ -41,7 +35,7 @@ class CategoryController extends AbstractController
 
         if($currentRoute == "category_new") $category = null;
 
-        if(!$category) $category = new Category();
+        if(!$category) $category = new Category($forum);
 
         $form = $this->createForm(CategoryType::class, $category);
 
@@ -55,18 +49,12 @@ class CategoryController extends AbstractController
 
             $category->setSlug($slugger->slug($category->getTitle()));
 
-            if($category->getForum() == null) $category->setForum($forum);
-
             $entityManager->persist($category);
             $entityManager->flush();
 
             $this->addFlash('success', 'Category créée avec succes !');
 
             return $this->redirectToRoute('default');
-        }
-        else
-        {
-            $this->addFlash('danger', 'Une erreur est survenue :(');
         }
 
         return $this->render('category/newOrEdit.html.twig', [

@@ -3,42 +3,105 @@
 {% block title %}Hello CategoryController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="container-fluid">
+    <div class="row">
+        <!-- first -->
+        <div class="col-md-3 pl-5">
+            <div id="card" class="card shadow mb-3">
+                <div class="card-body">
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum nisi non repudiandae fugiat
+                        aspernatur exercitationem voluptatem voluptate quae, facere veniam? Quisquam eos dignissimos
+                        deleniti nulla architecto hic possimus autem exercitationem.</p>
+                </div>
+            </div>
+        </div>
+        <!-- end first -->
 
-<div class="example-wrapper">
-    <h1>Hello! ✅</h1>
+        <!-- middle -->
+        <div class="col-md-6">
+            <span>
+                <a id="btn-back" type="button" class="btn btn-circle" href="{{ path('default') }}"><i class="fas fa-home"></i></i></a>
+                <span>
+                    <a class="white" href="{{ path('default') }}">Accueil</a> <i class="fas fa-arrow-right"></i> <a class="white" href="{{ path('default') }}">{{ category.forum.title|raw }}</a> <i class="fas fa-arrow-right"></i> <font class="font-weight-bold">{{category.title|raw}}</font>
+                    <span>
+                        <a id="btn-success" type="button" class="btn float-right" href="{{ path('category_new', {'forum': category.forum.id}) }}"><i class="fas fa-plus"></i> Nouvelle Categorie</a>
+                    </span>
+                </span>
+            </span>
+            <br><br>
+            <div id="card" class="card shadow mb-3">
+                <div class="card-body">
+                    <span class="float-left">
+                        <h3 class="card-title">{{category.title|raw}}</h3>
+                    </span>
+                    <span class="float-right">
+                        <a id="btn-warning" type="button" class="btn btn-circle"
+                            href="{{ path('category_edit', {'forum': category.forum.id, 'category': category.id}) }}"><i class="fas fa-wrench"></i>
+                        </a>
+                        <a id="btn-success" type="button" class="btn btn-circle"
+                            href="{{ path('topic_new', {'category': category.id}) }}"><i class="fas fa-plus"></i>
+                        </a>
+                    </span>
+                    {% if topic.content is defined and topic.content is not null %}
+                    <br>
+                    <br>
+                    <p class="card-text">{{ topic.content|striptags|u.truncate(55, true)|raw }}</p>
+                    {% endif %}
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <tbody>
+                            {% for topic in category.topic %}
+                            <tr>
+                                <div class="container">
+                                    <div class="row">
+                                        <th scope="row"><i class="far fa-bookmark"></i></th>
+                                        <td class="col-6">
+                                            <a href="{{ path('topic_show', {'id': topic.id}) }}"><h6>{{ topic.title }}</h6></a>
+                                            </n>
+                                            {% if topic.content is defined and topic.content is not null %}
+                                            <p>{{ topic.content|striptags|u.truncate(55, true)|raw }}</p>
+                                            {% endif %}
+                                        </td>
+                                        <td class="col-2">
+                                            <p class="text-center font-weight-bold">{{ topic.comments|length }}</p>
+                                            </n>
+                                            {% if topic.comments|length <= 1 %}
+                                                <p class="text-center font-weight-light">message</p>
+                                            {% else %}
+                                                <p class="text-center font-weight-light">messages</p>
+                                            {% endif %}
+                                        </td>
+                                        <td class="col-2">
+                                            <span class="border-left"></span>
+                                        </td>
+                                    </div>
+                                </div>
+                            </tr>
+                            {% else %}
+                            <div class="alert alert-danger m-3" role="alert">
+                                <i class="fas fa-exclamation-triangle"></i>
+                                Aucune donnée
+                            </div>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- end middle -->
 
-    <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
-      </table>
+        <!-- last -->
+        <div class="col-md-3">
+            <iframe src="https://discordapp.com/widget?id=520613107366887434&theme=dark" width="400" height="400"
+                allowtransparency="true" frameborder="0"></iframe>
+        </div>
+        <!-- end last -->
+    </div>
 </div>
+{% endblock %}
+
+{% block javascript %}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script></script>
 {% endblock %}

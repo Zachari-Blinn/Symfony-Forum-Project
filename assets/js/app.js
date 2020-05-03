@@ -12,7 +12,7 @@ import $ from 'jquery';
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 // import $ from 'jquery';
 
-console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+console.log('Bonjour !');
 
 $(function(){
     // On recupere la position du bloc par rapport au haut du site

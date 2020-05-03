@@ -13,16 +13,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ForumController extends AbstractController
 {
     /**
-     * @Route("/forum", name="forum")
-     */
-    public function index()
-    {
-        return $this->render('forum/index.html.twig', [
-            'controller_name' => 'ForumController',
-        ]);
-    }
-
-    /**
      * @Route("/forum/new", name="forum_new", methods={"GET","POST"})
      * @Route("/forum/edit/{slug}", name="forum_edit", methods={"GET","POST"})
      */
@@ -48,10 +38,6 @@ class ForumController extends AbstractController
             $this->addFlash('success', 'Création de Forum avec succes');
 
             return $this->redirectToRoute('default');
-        }
-        else
-        {
-            $this->addFlash('error', 'Une erreur est survenue :(');
         }
 
         return $this->render('forum/newOrEdit.html.twig', [

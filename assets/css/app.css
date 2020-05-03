@@ -1,14 +1,15 @@
 @import "~bootstrap";
 
 /* body */
-body {
+html, body {
     background-color: #16161a;
     font-family: Arial;
+    color: white;
 }
 
 #navigation{
-    background: #38383b;
-    height: 50px;
+    background: #01423a;
+    height: 40px;
     width:100%;
 }
 
@@ -24,7 +25,7 @@ body {
 .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 
 /* titre */
-h3 {
+h1, h2, h3, h4, h5, h6 {
     color: #fffffe;
 }
 
@@ -143,4 +144,34 @@ i {
 
 label {
     color: white;
+}
+
+a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+#jumbotron-header {
+    height: 200px;
+    margin: 0;
+}
+
+a {
+    color: #dddddf;
+}
+
+#topic-title {
+    padding-right: 10px;
+}
+
+#topic-publishedAt {
+    padding-top: 11px;
+}
+
+#comment-publishedAt {
+    padding-top: 1px;
+}
+
+#comment-title {
+    padding-right: 10px;
 }

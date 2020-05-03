@@ -43,9 +43,10 @@ class Category
      */
     private $slug;
 
-    public function __construct()
+    public function __construct(Forum $forum)
     {
         $this->topic = new ArrayCollection();
+        $this->setForum($forum);
     }
 
     public function getId(): ?int
