@@ -39,6 +39,8 @@ p {
 #card {
     background-color: #242629;
     color: #94a1b2;
+    max-width: 100%;
+    display: block ;
 }
 
 /* button valider */
@@ -149,7 +151,9 @@ label {
 
 a:hover {
     color: white;
-    text-decoration: none;
+    text-decoration-line: underline;
+    text-decoration-thickness: 2px;
+
 }
 
 #jumbotron-header {
@@ -198,10 +202,22 @@ a {
 }
 
 td {
-    top: 10px;
     bottom: 0px;
     margin-bottom: 0px;
     padding-bottom: 10px;
 }
 
+.table {
+    margin-top: 15px;
+}
 
+#navigation {
+    margin-top: 0px;
+    margin-bottom: 50px;
+}
+   
+#description {
+    margin-top: 50px;
+}
+   
+   

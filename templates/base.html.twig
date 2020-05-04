@@ -2,7 +2,7 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}{% endblock %} | Forum</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
@@ -11,14 +11,12 @@
         {# Header #}
         {% block header %}{% include "block/header.html.twig" %}{% endblock %}
 
-        {# Message flash #}
-        {% block message %}{% include "block/message.html.twig" %}{% endblock %}
-
         {# Barre de navigation #}
         {% block nav %}{% include "block/navbar.html.twig" %}{% endblock %}
 
-        <br>
-        
+        {# Message flash #}
+        {% block message %}{% include "block/message.html.twig" %}{% endblock %}      
+          
         {# Body #}
         {% block body %}{% endblock %}
 

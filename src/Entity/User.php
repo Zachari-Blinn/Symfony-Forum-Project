@@ -77,6 +77,11 @@ class User implements UserInterface
      */
     private $hasReads;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imageFilename;
+
     public function __construct()
     {
         $this->topics = new ArrayCollection();
@@ -311,6 +316,18 @@ class User implements UserInterface
                 $hasRead->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getImageFilename(): ?string
+    {
+        return $this->imageFilename;
+    }
+
+    public function setImageFilename(?string $imageFilename): self
+    {
+        $this->imageFilename = $imageFilename;
 
         return $this;
     }

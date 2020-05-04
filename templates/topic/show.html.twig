@@ -35,50 +35,53 @@
             <br><br>
 
             <!-- topic -->
-            <div class="media">
-                <img src="..." class="align-self-start mr-3" alt="...">
-                <div id="card" class="card shadow mb-3 p-3">
-                    <div class="media-body">
-                        <span>
-                            <h3 id="topic-title" class="float-left">{{ topic.title|raw }}</h3>
+            <article>
+                <div class="media">
+                    <img src="..." class="align-self-start mr-3" alt="...">
+                    <div id="card" class="card shadow mb-3 p-3">
+                        <div class="media-body">
                             <span>
-                                <small id="topic-publishedAt" class="float-left"> le {{ topic.createdAt|date("m/d/Y") }}</small>
+                                <h3 id="topic-title" class="float-left">{{ topic.title|raw }}</h3>
+                                <span>
+                                    <small id="topic-publishedAt" class="float-left"> le {{ topic.createdAt|date("m/d/Y") }}</small>
+                                </span>
                             </span>
+                            <br><br>
+                            <section>{{ topic.content|raw }}</section>
+                        </div>
+                        <span>
+                            <a id="btn-danger" type="button" class="btn btn-circle float-right" href="#"><i class="fas fa-trash-alt"></i></a>
+                            <a id="btn-warning" type="button" class="btn btn-circle float-right" href="{{ path('topic_edit', {'topic': topic.id}) }}"><i class="fas fa-wrench"></i></a>
                         </span>
-                        <br><br>
-                        <p>{{ topic.content|raw }}</p>
                     </div>
-                    <span>
-                        <a id="btn-danger" type="button" class="btn btn-circle float-right" href="#"><i class="fas fa-trash-alt"></i></a>
-                        <a id="btn-warning" type="button" class="btn btn-circle float-right" href="{{ path('topic_edit', {'topic': topic.id}) }}"><i class="fas fa-wrench"></i></a>
-                    </span>
                 </div>
-            </div>
+            </article>
             
             <br>
 
-            <!-- TODO boucle for message -->
             {% for comment in topic.comments %}
-            <div class="media">
-                <img src="..." class="align-self-start mr-3" alt="...">
-                <div id="card" class="card shadow mb-3 p-3">
-                    <section id="repondre">
-                        <span>
-                            <h6 id="comment-title" class="float-left">{{ comment.author }}</h6>
+            <article>
+                <div class="media">
+                    <img src="..." class="align-self-start mr-3" alt="...">
+                    <div id="card" class="card shadow mb-4 p-3">
+                        <section id="repondre">
                             <span>
-                                <small id="comment-publishedAt" class="float-left">le {{ comment.createdAt|date("m/d/Y") }}</small>
+                                <h6 id="comment-title" class="float-left">{{ comment.author }}</h6>
+                                <span>
+                                    <small id="comment-publishedAt" class="float-left">le {{ comment.createdAt|date("m/d/Y") }}</small>
+                                </span>
                             </span>
-                        </span>
-                        <br><br>
-                        {{ comment.content }}
-                    </section>
+                            <br><br>
+                            {{ comment.content }}
+                        </section>
+                    </div>
                 </div>
-            </div>
+            </article>
             {% endfor %}
 
             <div class="media">
                 <img src="..." class="align-self-start mr-3" alt="...">
-                <div id="card" class="card shadow mb-3 p-3">
+                <div id="card" class="d-inline-flexcard shadow mb-3 p-3">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis suscipit, at illo eaque velit alias officiis quod omnis numquam dolores aliquam sint, incidunt et qui, adipisci consequatur reprehenderit eligendi quas.</p>
                     <section id="repondre">
                         {{ form_start(form) }}
