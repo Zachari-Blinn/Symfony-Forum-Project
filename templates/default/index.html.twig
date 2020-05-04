@@ -22,7 +22,7 @@
     <div class="row">
         <!-- first -->
         <div class="col-md-3 pl-5">
-            <div id="card" class="card shadow mb-3">
+            <div id="card" class="card shadow mb-3 border-left">
                 <div class="card-body">
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum nisi non repudiandae fugiat
                         aspernatur exercitationem voluptatem voluptate quae, facere veniam? Quisquam eos dignissimos
@@ -39,7 +39,7 @@
                 <span>
                     <a class="white" href="{{ path('default') }}">Accueil</a>
                     <span>
-                        <a id="btn-success" type="button" class="btn float-right" href="{{ path('forum_new') }}"><i class="fas fa-plus"></i> Nouveau Forum</a>
+                        <a id="btn-success" type="button" class="btn float-right" href="{{ path('forum_new') }}"><i class="fas fa-feather-alt"></i> Forum</a>
                     </span>
                 </span>
             </span>
@@ -69,7 +69,7 @@
                             <tr>
                                 <div class="container">
                                     <div class="row">
-                                        <th scope="row"><i class="far fa-bookmark"></i></th>
+                                        <th scope="row"><i id="bookmark" class="far fa-bookmark"></i></th>
                                         <td class="col-6">
                                             <a href="{{ path('category', {'slug': category.slug}) }}"><h6>{{ category.title }}</h6></a>
                                             </n>

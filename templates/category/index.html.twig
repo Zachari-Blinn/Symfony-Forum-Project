@@ -39,7 +39,7 @@
                 <span>
                     <a class="white" href="{{ path('default') }}">Accueil</a> <i class="fas fa-arrow-right"></i> <a class="white" href="{{ path('default') }}">{{ category.forum.title|raw }}</a> <i class="fas fa-arrow-right"></i> <font class="font-weight-bold">{{category.title|raw}}</font>
                     <span>
-                        <a id="btn-success" type="button" class="btn float-right" href="{{ path('category_new', {'forum': category.forum.id}) }}"><i class="fas fa-plus"></i> Nouvelle Categorie</a>
+                        <a id="btn-success" type="button" class="btn float-right" href="{{ path('category_new', {'forum': category.forum.id}) }}"><i class="fas fa-feather-alt"></i> Categorie</a>
                     </span>
                 </span>
             </span>
@@ -58,9 +58,9 @@
                         </a>
                     </span>
                     {% if topic.content is defined and topic.content is not null %}
-                    <br>
-                    <br>
-                    <p class="card-text">{{ topic.content|striptags|u.truncate(55, true)|raw }}</p>
+                        <br>
+                        <br>
+                        <p class="card-text">{{ topic.content|striptags|u.truncate(55, true)|raw }}</p>
                     {% endif %}
                 </div>
                 <div class="table-responsive">
@@ -70,16 +70,16 @@
                             <tr>
                                 <div class="container">
                                     <div class="row">
-                                        <th scope="row"><i class="far fa-bookmark"></i></th>
+                                        <th class="col-1" scope="row"><i id="bookmark" class="far fa-bookmark"></i></th>
                                         <td class="col-6">
                                             <a href="{{ path('topic_show', {'id': topic.id}) }}"><h6>{{ topic.title }}</h6></a>
                                             </n>
                                             {% if topic.content is defined and topic.content is not null %}
-                                            <p>{{ topic.content|striptags|u.truncate(55, true)|raw }}</p>
+                                                <p>{{ topic.content|striptags|u.truncate(50, '...')|raw }}</p>
                                             {% endif %}
                                         </td>
-                                        <td class="col-2">
-                                            <p class="text-center font-weight-bold">{{ topic.comments|length }}</p>
+                                        <td class="col-1">
+                                            <p id="topic-message" class="text-center font-weight-bold">{{ topic.comments|length }}</p>
                                             </n>
                                             {% if topic.comments|length <= 1 %}
                                                 <p class="text-center font-weight-light">message</p>
@@ -87,7 +87,16 @@
                                                 <p class="text-center font-weight-light">messages</p>
                                             {% endif %}
                                         </td>
-                                        <td class="col-2">
+                                        <td class="col-1">
+                                            <p id="topic-message" class="text-center font-weight-bold">0</p>
+                                            </n>
+                                            {% if topic.comments|length <= 1 %}
+                                                <p class="text-center font-weight-light">vue</p>
+                                            {% else %}
+                                                <p class="text-center font-weight-light">vues</p>
+                                            {% endif %}
+                                        </td>
+                                        <td class="col-3">
                                             <!-- TODO -->
                                         </td>
                                     </div>
@@ -96,7 +105,7 @@
                             {% else %}
                             <div class="alert alert-danger m-3" role="alert">
                                 <i class="fas fa-exclamation-triangle"></i>
-                                Aucune donnée
+                                Aucune donnée - Soyez la première personne à écrire un sujet sur cette catégorie !
                             </div>
                             {% endfor %}
                         </tbody>

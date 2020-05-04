@@ -5,51 +5,27 @@
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
-            <script src="https://kit.fontawesome.com/8a50ac4291.js" crossorigin="anonymous"></script>
         {% endblock %}
     </head>
     <body>
-        <header>
-            <div id="jumbotron-header" class="jumbotron text-center jumbotron-fluid">
-                <!-- <h1>My First Bootstrap Page</h1>
-                <p>Resize this responsive page to see the effect!</p> -->
-             </div>
-        </header>
-        <nav id="navigation">
-            <div class="container">
-                <ul class="nav justify-content-center">
-                    <li class="nav-item">
-                    <a class="nav-link active text-white" href="#">ACCUEIL</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link text-white" href="#">PROFIL</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link text-white" href="#">MESSAGERIE</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link text-white" href="#">DECONNEXION</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-        <br>
-        {% for label, messages in app.flashes %}
-            {% for message in messages %}
-            <div class="alert alert-{{ label }} alert-dismissible fade show">
-                {{ message }}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            {% endfor %}
-        {% endfor %}
-        {% block body %}{% endblock %}
-        <footer>
-            <!-- <div class="jumbotron jumbotron-fluid">
+        {# Header #}
+        {% block header %}{% include "block/header.html.twig" %}{% endblock %}
 
-            </div> -->
-        </footer>
+        {# Message flash #}
+        {% block message %}{% include "block/message.html.twig" %}{% endblock %}
+
+        {# Barre de navigation #}
+        {% block nav %}{% include "block/navbar.html.twig" %}{% endblock %}
+
+        <br>
+        
+        {# Body #}
+        {% block body %}{% endblock %}
+
+        {# Footer #}
+        {% block footer %}{% include "block/footer.html.twig" %}{% endblock %}
+
+        {# Javascript #}
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
         {% endblock %}
