@@ -45,11 +45,6 @@ class Comment
     private $topic;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\HasReadComment", mappedBy="comment")
-     */
-    private $hasReadComments;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="comments")
      */
     private $user;
@@ -59,7 +54,6 @@ class Comment
         $this->setTopic($topic);
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
-        $this->hasReadComments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -123,37 +117,6 @@ class Comment
     public function setTopic(?Topic $topic): self
     {
         $this->topic = $topic;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|HasReadComment[]
-     */
-    public function getHasReadComments(): Collection
-    {
-        return $this->hasReadComments;
-    }
-
-    public function addHasReadComment(HasReadComment $hasReadComment): self
-    {
-        if (!$this->hasReadComments->contains($hasReadComment)) {
-            $this->hasReadComments[] = $hasReadComment;
-            $hasReadComment->setComment($this);
-        }
-
-        return $this;
-    }
-
-    public function removeHasReadComment(HasReadComment $hasReadComment): self
-    {
-        if ($this->hasReadComments->contains($hasReadComment)) {
-            $this->hasReadComments->removeElement($hasReadComment);
-            // set the owning side to null (unless already changed)
-            if ($hasReadComment->getComment() === $this) {
-                $hasReadComment->setComment(null);
-            }
-        }
 
         return $this;
     }

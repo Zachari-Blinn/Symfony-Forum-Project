@@ -33,7 +33,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/profil/edit/{slug}", name="user_profil_edit", methods={"GET","POST"})
+     * @Route("/user/profil/edit/{pseudo}", name="user_profil_edit", methods={"GET","POST"})
      */
     public function editProfil(User $user, Request $request, SluggerInterface $slugger): Response
     {

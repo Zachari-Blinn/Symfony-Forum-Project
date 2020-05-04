@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\User;
+use App\Entity\Topic;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -25,6 +27,18 @@ class HasReadTopic
      * @ORM\ManyToOne(targetEntity="App\Entity\Topic", inversedBy="hasReadTopics")
      */
     private $topic;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $updatedAt;
+
+    public function __construct(User $user, Topic $topic)
+    {
+        $this->setUser($user);
+        $this->setTopic($topic);
+        $this->setUpdatedAt(new \DateTime());
+    }
 
     public function getId(): ?int
     {
@@ -51,6 +65,18 @@ class HasReadTopic
     public function setTopic(?Topic $topic): self
     {
         $this->topic = $topic;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeInterface
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(\DateTimeInterface $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

@@ -88,14 +88,19 @@ class User implements UserInterface
     private $conversationUsers;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\HasReadComment", mappedBy="user")
-     */
-    private $hasReadComments;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user")
      */
     private $comments;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $createdAt;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $slug;
 
     public function __construct()
     {
@@ -103,8 +108,9 @@ class User implements UserInterface
         $this->participates = new ArrayCollection();
         $this->hasReadTopics = new ArrayCollection();
         $this->conversationUsers = new ArrayCollection();
-        $this->hasReadComments = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->setIsActive(true);
+        $this->setCreatedAt(new \DateTime());
     }
 
     public function getId(): ?int
@@ -382,37 +388,6 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|HasReadComment[]
-     */
-    public function getHasReadComments(): Collection
-    {
-        return $this->hasReadComments;
-    }
-
-    public function addHasReadComment(HasReadComment $hasReadComment): self
-    {
-        if (!$this->hasReadComments->contains($hasReadComment)) {
-            $this->hasReadComments[] = $hasReadComment;
-            $hasReadComment->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeHasReadComment(HasReadComment $hasReadComment): self
-    {
-        if ($this->hasReadComments->contains($hasReadComment)) {
-            $this->hasReadComments->removeElement($hasReadComment);
-            // set the owning side to null (unless already changed)
-            if ($hasReadComment->getUser() === $this) {
-                $hasReadComment->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|Comment[]
      */
     public function getComments(): Collection
@@ -439,6 +414,30 @@ class User implements UserInterface
                 $comment->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeInterface $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(?string $slug): self
+    {
+        $this->slug = $slug;
 
         return $this;
     }
