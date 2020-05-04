@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Preference;
+use App\Entity\PrivateMessage;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Preference|null find($id, $lockMode = null, $lockVersion = null)
- * @method Preference|null findOneBy(array $criteria, array $orderBy = null)
- * @method Preference[]    findAll()
- * @method Preference[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method PrivateMessage|null find($id, $lockMode = null, $lockVersion = null)
+ * @method PrivateMessage|null findOneBy(array $criteria, array $orderBy = null)
+ * @method PrivateMessage[]    findAll()
+ * @method PrivateMessage[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PreferenceRepository extends ServiceEntityRepository
+class PrivateMessageRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Preference::class);
+        parent::__construct($registry, PrivateMessage::class);
     }
 
     // /**
-    //  * @return Preference[] Returns an array of Preference objects
+    //  * @return PrivateMessage[] Returns an array of PrivateMessage objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class PreferenceRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Preference
+    public function findOneBySomeField($value): ?PrivateMessage
     {
         return $this->createQueryBuilder('p')
             ->andWhere('p.exampleField = :val')

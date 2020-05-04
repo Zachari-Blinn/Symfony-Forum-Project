@@ -59,9 +59,9 @@ class Topic
     private $isActive;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\HasRead", mappedBy="topic")
+     * @ORM\OneToMany(targetEntity="App\Entity\HasReadTopic", mappedBy="topic")
      */
-    private $hasReads;
+    private $hasReadTopics;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="topic")
@@ -75,7 +75,7 @@ class Topic
 
     public function __construct(Category $category)
     {
-        $this->hasReads = new ArrayCollection();
+        $this->hasReadTopics = new ArrayCollection();
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
         $this->setIsActive(true);
@@ -185,30 +185,30 @@ class Topic
     }
 
     /**
-     * @return Collection|HasRead[]
+     * @return Collection|HasReadTopic[]
      */
-    public function getHasReads(): Collection
+    public function getHasReadTopics(): Collection
     {
-        return $this->hasReads;
+        return $this->hasReadTopics;
     }
 
-    public function addHasRead(HasRead $hasRead): self
+    public function addHasRead(HasReadTopic $hasReadTopic): self
     {
-        if (!$this->hasReads->contains($hasRead)) {
-            $this->hasReads[] = $hasRead;
-            $hasRead->setTopic($this);
+        if (!$this->hasReadTopics->contains($hasReadTopic)) {
+            $this->hasReadTopics[] = $hasReadTopic;
+            $hasReadTopic->setTopic($this);
         }
 
         return $this;
     }
 
-    public function removeHasRead(HasRead $hasRead): self
+    public function removeHasRead(HasReadTopic $hasReadTopic): self
     {
-        if ($this->hasReads->contains($hasRead)) {
-            $this->hasReads->removeElement($hasRead);
+        if ($this->hasReadTopics->contains($hasReadTopic)) {
+            $this->hasReadTopics->removeElement($hasReadTopic);
             // set the owning side to null (unless already changed)
-            if ($hasRead->getTopic() === $this) {
-                $hasRead->setTopic(null);
+            if ($hasReadTopic->getTopic() === $this) {
+                $hasReadTopic->setTopic(null);
             }
         }
 

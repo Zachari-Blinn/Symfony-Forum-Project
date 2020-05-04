@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\HasReadRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\HasReadTopicRepository")
  */
-class HasRead
+class HasReadTopic
 {
     /**
      * @ORM\Id()
@@ -17,12 +17,12 @@ class HasRead
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="hasReads")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="hasReadTopics")
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Topic", inversedBy="hasReads")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Topic", inversedBy="hasReadTopics")
      */
     private $topic;
 

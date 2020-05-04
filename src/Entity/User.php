@@ -73,20 +73,38 @@ class User implements UserInterface
     private $isActive;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\HasRead", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\HasReadTopic", mappedBy="user")
      */
-    private $hasReads;
+    private $hasReadTopics;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $imageFilename;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ConversationUser", mappedBy="user")
+     */
+    private $conversationUsers;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\HasReadComment", mappedBy="user")
+     */
+    private $hasReadComments;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user")
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->topics = new ArrayCollection();
         $this->participates = new ArrayCollection();
-        $this->hasReads = new ArrayCollection();
+        $this->hasReadTopics = new ArrayCollection();
+        $this->conversationUsers = new ArrayCollection();
+        $this->hasReadComments = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -290,30 +308,30 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|HasRead[]
+     * @return Collection|HasReadTopic[]
      */
-    public function getHasReads(): Collection
+    public function getHasReadTopics(): Collection
     {
-        return $this->hasReads;
+        return $this->hasReadTopics;
     }
 
-    public function addHasRead(HasRead $hasRead): self
+    public function addHasReadTopic(HasReadTopic $hasReadTopic): self
     {
-        if (!$this->hasReads->contains($hasRead)) {
-            $this->hasReads[] = $hasRead;
-            $hasRead->setUser($this);
+        if (!$this->hasReadTopics->contains($hasReadTopic)) {
+            $this->hasReadTopics[] = $hasReadTopic;
+            $hasReadTopic->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeHasRead(HasRead $hasRead): self
+    public function removeHasReadTopic(HasReadTopic $hasReadTopic): self
     {
-        if ($this->hasReads->contains($hasRead)) {
-            $this->hasReads->removeElement($hasRead);
+        if ($this->hasReadTopics->contains($hasReadTopic)) {
+            $this->hasReadTopics->removeElement($hasReadTopic);
             // set the owning side to null (unless already changed)
-            if ($hasRead->getUser() === $this) {
-                $hasRead->setUser(null);
+            if ($hasReadTopic->getUser() === $this) {
+                $hasReadTopic->setUser(null);
             }
         }
 
@@ -328,6 +346,99 @@ class User implements UserInterface
     public function setImageFilename(?string $imageFilename): self
     {
         $this->imageFilename = $imageFilename;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|ConversationUser[]
+     */
+    public function getConversationUsers(): Collection
+    {
+        return $this->conversationUsers;
+    }
+
+    public function addConversationUser(ConversationUser $conversationUser): self
+    {
+        if (!$this->conversationUsers->contains($conversationUser)) {
+            $this->conversationUsers[] = $conversationUser;
+            $conversationUser->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConversationUser(ConversationUser $conversationUser): self
+    {
+        if ($this->conversationUsers->contains($conversationUser)) {
+            $this->conversationUsers->removeElement($conversationUser);
+            // set the owning side to null (unless already changed)
+            if ($conversationUser->getUser() === $this) {
+                $conversationUser->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|HasReadComment[]
+     */
+    public function getHasReadComments(): Collection
+    {
+        return $this->hasReadComments;
+    }
+
+    public function addHasReadComment(HasReadComment $hasReadComment): self
+    {
+        if (!$this->hasReadComments->contains($hasReadComment)) {
+            $this->hasReadComments[] = $hasReadComment;
+            $hasReadComment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeHasReadComment(HasReadComment $hasReadComment): self
+    {
+        if ($this->hasReadComments->contains($hasReadComment)) {
+            $this->hasReadComments->removeElement($hasReadComment);
+            // set the owning side to null (unless already changed)
+            if ($hasReadComment->getUser() === $this) {
+                $hasReadComment->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->contains($comment)) {
+            $this->comments->removeElement($comment);
+            // set the owning side to null (unless already changed)
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
+            }
+        }
 
         return $this;
     }

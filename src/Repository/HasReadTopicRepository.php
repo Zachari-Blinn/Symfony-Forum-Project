@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\HasRead;
+use App\Entity\HasReadTopic;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method HasRead|null find($id, $lockMode = null, $lockVersion = null)
- * @method HasRead|null findOneBy(array $criteria, array $orderBy = null)
- * @method HasRead[]    findAll()
- * @method HasRead[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method HasReadTopic|null find($id, $lockMode = null, $lockVersion = null)
+ * @method HasReadTopic|null findOneBy(array $criteria, array $orderBy = null)
+ * @method HasReadTopic[]    findAll()
+ * @method HasReadTopic[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class HasReadRepository extends ServiceEntityRepository
+class HasReadTopicRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, HasRead::class);
+        parent::__construct($registry, HasReadTopic::class);
     }
 
     // /**
-    //  * @return HasRead[] Returns an array of HasRead objects
+    //  * @return HasReadTopic[] Returns an array of HasReadTopic objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class HasReadRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?HasRead
+    public function findOneBySomeField($value): ?HasReadTopic
     {
         return $this->createQueryBuilder('h')
             ->andWhere('h.exampleField = :val')
