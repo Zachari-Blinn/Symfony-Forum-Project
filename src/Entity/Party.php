@@ -63,6 +63,16 @@ class Party
      */
     private $isAtive;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="parties")
+     */
+    private $user;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $localization;
+
     public function __construct()
     {
         $this->participates = new ArrayCollection();
@@ -145,18 +155,6 @@ class Party
         return $this;
     }
 
-    public function getStatus(): ?Status
-    {
-        return $this->status;
-    }
-
-    public function setStatus(?Status $status): self
-    {
-        $this->status = $status;
-
-        return $this;
-    }
-
     /**
      * @return Collection|Participates[]
      */
@@ -196,6 +194,30 @@ class Party
     public function setIsAtive(bool $isAtive): self
     {
         $this->isAtive = $isAtive;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getLocalization(): ?string
+    {
+        return $this->localization;
+    }
+
+    public function setLocalization(string $localization): self
+    {
+        $this->localization = $localization;
 
         return $this;
     }
