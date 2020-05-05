@@ -1,15 +1,25 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Register{% endblock %}
+{% block title %}inscription{% endblock %}
 
 {% block body %}
-    <h1>Register</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="card" class="card shadow mb-4 p-3">
+                <h1>S'inscrire</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+                {{ form_start(registrationForm) }}
+                {{ form_row(registrationForm.email) }}
+                {{ form_row(registrationForm.pseudo) }}
+                {{ form_row(registrationForm.plainPassword) }}
+                {{ form_row(registrationForm.agreeTerms) }}
 
-        <button class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+                <button id="btn-success" class="btn float-right">s'inscrire</button>
+                <br><br>
+                {{ form_end(registrationForm) }}
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

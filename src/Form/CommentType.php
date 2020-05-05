@@ -13,12 +13,20 @@ class CommentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $isAuth = $options['isAuth'];
+
+        if($isAuth == false)
+        {
+            $builder
+                ->add('author', TextType::class, [
+                    'label' => 'Pseudo',
+                    'required' => true,
+                ]);
+        }
         $builder
-            ->add('author', TextType::class, [
-                'label' => 'Pseudo'
-            ])
             ->add('content', TextareaType::class, [
-                'label' => 'Message'
+                'label' => 'Message',
+                'required' => true,
             ])
         ;
     }
@@ -27,6 +35,7 @@ class CommentType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Comment::class,
+            'isAuth' => false,
         ]);
     }
 }

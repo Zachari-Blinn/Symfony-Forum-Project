@@ -88,11 +88,6 @@ class User implements UserInterface
     private $conversationUsers;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\HasReadComment", mappedBy="user")
-     */
-    private $hasReadComments;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Comment", mappedBy="user")
      */
     private $comments;
@@ -103,7 +98,6 @@ class User implements UserInterface
         $this->participates = new ArrayCollection();
         $this->hasReadTopics = new ArrayCollection();
         $this->conversationUsers = new ArrayCollection();
-        $this->hasReadComments = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
 
@@ -375,37 +369,6 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($conversationUser->getUser() === $this) {
                 $conversationUser->setUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|HasReadComment[]
-     */
-    public function getHasReadComments(): Collection
-    {
-        return $this->hasReadComments;
-    }
-
-    public function addHasReadComment(HasReadComment $hasReadComment): self
-    {
-        if (!$this->hasReadComments->contains($hasReadComment)) {
-            $this->hasReadComments[] = $hasReadComment;
-            $hasReadComment->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeHasReadComment(HasReadComment $hasReadComment): self
-    {
-        if ($this->hasReadComments->contains($hasReadComment)) {
-            $this->hasReadComments->removeElement($hasReadComment);
-            // set the owning side to null (unless already changed)
-            if ($hasReadComment->getUser() === $this) {
-                $hasReadComment->setUser(null);
             }
         }
 

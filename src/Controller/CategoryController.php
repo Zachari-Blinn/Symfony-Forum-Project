@@ -18,7 +18,7 @@ class CategoryController extends AbstractController
     /**
      * @Route("/category/{slug}", name="app_category")
      */
-    public function index(Category $category, TopicRepository $topicRepository)
+    public function index(Category $category)
     {
         return $this->render('category/index.html.twig', [
             'category' => $category,
