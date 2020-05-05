@@ -71,7 +71,7 @@
                     <div class="table-responsive">
                         <table class="table table-hover">
                             <tbody>
-                                {% for topic in category.topic %}
+                                {% for topic in topics %}
                                 <tr>
                                     <div class="container">
                                         <div class="row">
@@ -121,6 +121,9 @@
                         </table>
                     </div>
                 </div>
+            </div>
+            <div class="pagination">
+                {{ knp_pagination_render(topics) }}
             </div>
         </div>
         <!-- end middle -->
