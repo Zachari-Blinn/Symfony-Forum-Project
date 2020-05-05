@@ -2,12 +2,15 @@
 
 namespace App\Entity;
 
+use DateTime;
+use App\Entity\User;
+use App\Entity\Party;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ParticipatesRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ParticipateRepository")
  */
-class Participates
+class Participate
 {
     /**
      * @ORM\Id()
@@ -42,14 +45,32 @@ class Participates
     private $equipment;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="participates")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="participate")
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Party", inversedBy="participates")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Party", inversedBy="participate")
      */
     private $party;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $locomotion;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $author;
+
+    public function __construct(Party $party, User $user = null)
+    {
+        $this->setParty($party);
+        $this->setUser($user);
+        $this->setUpdatedAt(new \DateTime('now'));
+        $this->setCreatedAt(new \DateTime('now'));
+    }
 
     public function getId(): ?int
     {
@@ -136,6 +157,30 @@ class Participates
     public function setParty(?Party $party): self
     {
         $this->party = $party;
+
+        return $this;
+    }
+
+    public function getLocomotion(): ?bool
+    {
+        return $this->locomotion;
+    }
+
+    public function setLocomotion(bool $locomotion): self
+    {
+        $this->locomotion = $locomotion;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?string
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(?string $author): self
+    {
+        $this->author = $author;
 
         return $this;
     }

@@ -10,6 +10,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class PartyType extends AbstractType
@@ -37,13 +38,38 @@ class PartyType extends AbstractType
                 'label' => 'Expiration des inscriptions',
                 'required' => true,
             ])
-            ->add('price', MoneyType::class, [
-                'label' => "Montant de la cotisation",
+            ->add('cautionPrice', MoneyType::class, [
+                'label' => "Prix de la caution",
                 'required' => false,
-                'empty_data' => 0,
+                'data' => 50,
                 'currency' => 'EUR',
             ])
-            // TODO ajouter "Roles/utilisateurs concernés" 
+            ->add('locationPrice', MoneyType::class, [
+                'label' => "Prix de la location",
+                'required' => false,
+                'data' => 0,
+                'currency' => 'EUR',
+            ])
+            ->add('freelancePrice', MoneyType::class, [
+                'label' => "Prix participation freelance",
+                'required' => false,
+                'data' => 0,
+                'currency' => 'EUR',
+            ])
+            ->add('numberLocation', NumberType::class, [
+                'label' => "Nombre de location disponible",
+                'required' => false,
+                'data' => 0,
+                'currency' => 'EUR',
+            ])
+            ->add('allowAnonymous', ChoiceType::class, [
+                'choices' => [
+                    'Oui' => true,
+                    'Non' => false,
+                ],
+                'label' => "Accepter les utilisateurs anonymes",
+                'required' => false,
+            ])
             ->add('isAtive', ChoiceType::class, [
                 'choices' => [
                     'Oui' => true,

@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Participates;
+use App\Entity\Participate;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @method Participates|null find($id, $lockMode = null, $lockVersion = null)
- * @method Participates|null findOneBy(array $criteria, array $orderBy = null)
- * @method Participates[]    findAll()
- * @method Participates[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Participate|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Participate|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Participate[]    findAll()
+ * @method Participate[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class ParticipatesRepository extends ServiceEntityRepository
+class ParticipateRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Participates::class);
+        parent::__construct($registry, Participate::class);
     }
 
     // /**
-    //  * @return Participates[] Returns an array of Participates objects
+    //  * @return Participate[] Returns an array of Participates objects
     //  */
     /*
     public function findByExampleField($value)

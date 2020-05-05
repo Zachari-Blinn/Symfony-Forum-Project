@@ -43,9 +43,9 @@ class User implements UserInterface
     private $topics;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Participates", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\Participate", mappedBy="user")
      */
-    private $participates;
+    private $participate;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -227,14 +227,14 @@ class User implements UserInterface
     }
 
     /**
-     * @return Collection|Participates[]
+     * @return Collection|Participate[]
      */
     public function getParticipates(): Collection
     {
         return $this->participates;
     }
 
-    public function addParticipate(Participates $participate): self
+    public function addParticipate(Participate $participate): self
     {
         if (!$this->participates->contains($participate)) {
             $this->participates[] = $participate;
@@ -244,7 +244,7 @@ class User implements UserInterface
         return $this;
     }
 
-    public function removeParticipate(Participates $participate): self
+    public function removeParticipate(Participate $participate): self
     {
         if ($this->participates->contains($participate)) {
             $this->participates->removeElement($participate);

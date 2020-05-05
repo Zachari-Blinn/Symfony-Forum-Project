@@ -39,19 +39,14 @@ class Party
     private $expireAt;
 
     /**
-     * @ORM\Column(type="float", nullable=true)
-     */
-    private $price;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $updatedAt;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Participates", mappedBy="party")
+     * @ORM\OneToMany(targetEntity="App\Entity\Participate", mappedBy="party")
      */
-    private $participates;
+    private $participate;
 
     /**
      * @ORM\Column(type="boolean")
@@ -67,6 +62,31 @@ class Party
      * @ORM\Column(type="string", length=255)
      */
     private $localization;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $cautionPrice;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $locationLprice;
+
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $freelancePrice;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $numberLocation;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $allowAnonymous;
 
     public function __construct()
     {
@@ -126,18 +146,6 @@ class Party
         return $this;
     }
 
-    public function getPrice(): ?float
-    {
-        return $this->price;
-    }
-
-    public function setPrice(?float $price): self
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
     public function getUpdatedAt(): ?\DateTimeInterface
     {
         return $this->updatedAt;
@@ -151,14 +159,14 @@ class Party
     }
 
     /**
-     * @return Collection|Participates[]
+     * @return Collection|Participate[]
      */
-    public function getParticipates(): Collection
+    public function getParticipate(): Collection
     {
         return $this->participates;
     }
 
-    public function addParticipate(Participates $participate): self
+    public function addParticipate(Participate $participate): self
     {
         if (!$this->participates->contains($participate)) {
             $this->participates[] = $participate;
@@ -168,7 +176,7 @@ class Party
         return $this;
     }
 
-    public function removeParticipate(Participates $participate): self
+    public function removeParticipate(Participate $participate): self
     {
         if ($this->participates->contains($participate)) {
             $this->participates->removeElement($participate);
@@ -213,6 +221,66 @@ class Party
     public function setLocalization(string $localization): self
     {
         $this->localization = $localization;
+
+        return $this;
+    }
+
+    public function getCautionPrice(): ?float
+    {
+        return $this->cautionPrice;
+    }
+
+    public function setCautionPrice(?float $cautionPrice): self
+    {
+        $this->cautionPrice = $cautionPrice;
+
+        return $this;
+    }
+
+    public function getLocationLprice(): ?float
+    {
+        return $this->locationLprice;
+    }
+
+    public function setLocationLprice(?float $locationLprice): self
+    {
+        $this->locationLprice = $locationLprice;
+
+        return $this;
+    }
+
+    public function getFreelancePrice(): ?float
+    {
+        return $this->freelancePrice;
+    }
+
+    public function setFreelancePrice(?float $freelancePrice): self
+    {
+        $this->freelancePrice = $freelancePrice;
+
+        return $this;
+    }
+
+    public function getNumberLocation(): ?int
+    {
+        return $this->numberLocation;
+    }
+
+    public function setNumberLocation(?int $numberLocation): self
+    {
+        $this->numberLocation = $numberLocation;
+
+        return $this;
+    }
+
+    public function getAllowAnonymous(): ?bool
+    {
+        return $this->allowAnonymous;
+    }
+
+    public function setAllowAnonymous(?bool $allowAnonymous): self
+    {
+        $this->allowAnonymous = $allowAnonymous;
 
         return $this;
     }
