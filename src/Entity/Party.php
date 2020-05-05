@@ -49,11 +49,6 @@ class Party
     private $updatedAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Status", inversedBy="parties")
-     */
-    private $status;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Participates", mappedBy="party")
      */
     private $participates;
