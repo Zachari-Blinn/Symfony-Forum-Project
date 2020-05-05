@@ -43,12 +43,12 @@
             </span>
         </div>
         <span>
-            <a id="btn-back" type="button" class="btn btn-circle" href="{{ path('default') }}"><i
+            <a id="btn-back" type="button" class="btn btn-circle" href="{{ path('app_default') }}"><i
                     class="fas fa-home"></i></i></a>
             <span>
-                <a class="white" href="{{ path('default') }}">Accueil</a>
+                <a class="white" href="{{ path('app_default') }}">Accueil</a>
                 <span>
-                    <a id="btn-success" type="button" class="btn float-right" href="{{ path('forum_new') }}"><i
+                    <a id="btn-success" type="button" class="btn float-right" href="{{ path('app_forum_new') }}"><i
                             class="fas fa-feather-alt"></i> Forum</a>
                 </span>
             </span>
@@ -62,9 +62,9 @@
                     </span>
                     <span class="float-right">
                         <a id="btn-warning" type="button" class="btn btn-circle"
-                            href="{{ path('forum_edit', {'slug': forum.slug}) }}"><i class="fas fa-wrench"></i></a>
+                            href="{{ path('app_forum_edit', {'slug': forum.slug}) }}"><i class="fas fa-wrench"></i></a>
                         <a id="btn-success" type="button" class="btn btn-circle"
-                            href="{{ path('category_new', {'forum': forum.id}) }}"><i class="fas fa-plus"></i></a>
+                            href="{{ path('app_category_new', {'forum': forum.id}) }}"><i class="fas fa-plus"></i></a>
                     </span>
                     {% if forum.description is defined and forum.description is not null %}
                     <p id="description" class="card-text">{{ forum.description|raw }}</p>
@@ -79,7 +79,7 @@
                                     <div class="row">
                                         <th scope="row"><i id="bookmark" class="col-1 far fa-bookmark"></i></th>
                                         <td class="col-6">
-                                            <a href="{{ path('category', {'slug': category.slug}) }}">
+                                            <a href="{{ path('app_category', {'slug': category.slug}) }}">
                                                 <h6>{{ category.title }}</h6>
                                             </a>
                                             </n>
@@ -124,14 +124,14 @@
             {% endfor %}
         </div>
 
-        <a id="btn-success" type="button" class="btn float-right" href="{{ path('forum_new') }}"><i
+        <a id="btn-success" type="button" class="btn float-right" href="{{ path('app_forum_new') }}"><i
                 class="fas fa-feather-alt"></i> Forum</a>
     </div>
     <!-- end middle -->
 
     <!-- last -->
     <div class="col-md-3">
-        {% block discord %}{% include "block/discordIntegration.html.twig" %}{% endblock %}
+        {% block discord %}{% include "block/_discordIntegration.html.twig" %}{% endblock %}
     </div>
     <!-- end last -->
 </div>

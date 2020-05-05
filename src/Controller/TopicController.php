@@ -6,11 +6,7 @@ use App\Entity\Topic;
 use App\Entity\Comment;
 use App\Form\TopicType;
 use App\Entity\Category;
-use App\Entity\HasReadTopic;
 use App\Form\CommentType;
-use App\Repository\CommentRepository;
-use App\Repository\HasReadTopicRepository;
-use App\Repository\TopicRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,8 +15,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class TopicController extends AbstractController
 {
     /**
-     * @Route("/topic/new/{category}", name="topic_new", methods={"GET","POST"})
-     * @Route("/topic/edit/{topic}", name="topic_edit", methods={"GET","POST"})
+     * @Route("/topic/new/{category}", name="app_topic_new", methods={"GET","POST"})
+     * @Route("/topic/edit/{topic}", name="app_topic_edit", methods={"GET","POST"})
      */
     public function newOrEdit(Category $category = null, Topic $topic = null, Request $request): Response
     {
@@ -52,46 +48,20 @@ class TopicController extends AbstractController
     }
 
     /**
-     * @Route("/topic/show/{id}", name="topic_show", methods={"GET","POST"})
+     * @Route("/topic/show/{id}", name="app_topic_show", methods={"GET","POST"})
      */
-    public function show(Topic $topic, Comment $comment = null, HasReadTopicRepository $hasReadTopicRepository, TopicRepository $topicRepository, Request $request): Response
+    public function show(Topic $topic, Comment $comment = null, Request $request): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
-
         $comment = new Comment($topic);
 
-        $user = $this->getUser();
-        $isAuth = false;
-
-        $vues = $topicRepository->findVuesByTopic($topic);
-
-        if($user != null)
-        {
-            $isAuth = true;
-            $comment->setUser($user);
-            $hasReadTopic = $hasReadTopicRepository->findOneBy(['user' => $user->getId(), 'topic' => $topic->getId()]);
-
-            if($hasReadTopicRepository->findOneBy(['user' => $user->getId(), 'topic' => $topic->getId()]) == null)
-            {
-                $hasReadTopic = new HasReadTopic($user, $topic);
-            }
-            else
-            {
-                $hasReadTopic->setUpdatedAt(new \DateTime());
-            }
-
-            $entityManager->persist($hasReadTopic);
-            $entityManager->flush();
-        }
-
-        $form = $this->createForm(CommentType::class, $comment, [
-            'isAuth' => $isAuth,
-        ]);
+        $form = $this->createForm(CommentType::class, $comment);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
         {
+            $entityManager = $this->getDoctrine()->getManager();
+
             $entityManager->persist($comment);
             $entityManager->flush();
 
@@ -103,7 +73,6 @@ class TopicController extends AbstractController
         }
 
         return $this->render('topic/show.html.twig', [
-            'vues' => $vues,
             'topic' => $topic,
             'form' => $form->createView()
         ]);

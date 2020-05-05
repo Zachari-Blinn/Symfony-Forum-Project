@@ -16,20 +16,18 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/category/{slug}", name="category")
+     * @Route("/category/{slug}", name="app_category")
      */
-    public function index(Category $category, CategoryRepository $categoryRepository)
+    public function index(Category $category, TopicRepository $topicRepository)
     {
-        // $vues = $categoryRepository->findVuesByTopic(1);
-
         return $this->render('category/index.html.twig', [
             'category' => $category,
         ]);
     }
 
     /**
-     * @Route("/category/new/{forum}", name="category_new", methods={"GET","POST"})
-     * @Route("/category/edit/{forum}/{category}", name="category_edit", methods={"GET","POST"})
+     * @Route("/category/new/{forum}", name="app_category_new", methods={"GET","POST"})
+     * @Route("/category/edit/{forum}/{category}", name="app_category_edit", methods={"GET","POST"})
      */
     public function newOrEdit(Forum $forum, Category $category = null, Request $request): Response
     {

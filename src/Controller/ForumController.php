@@ -13,8 +13,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ForumController extends AbstractController
 {
     /**
-     * @Route("/forum/new", name="forum_new", methods={"GET","POST"})
-     * @Route("/forum/edit/{slug}", name="forum_edit", methods={"GET","POST"})
+     * @Route("/forum/new", name="app_forum_new", methods={"GET","POST"})
+     * @Route("/forum/edit/{slug}", name="app_forum_edit", methods={"GET","POST"})
      */
     public function newOrEdit(Forum $forum = null, Request $request): Response
     {

@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/", name="default")
+     * @Route("/", name="app_default")
      */
     public function index(ForumRepository $forumRepository)
     {
@@ -21,7 +21,7 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/admin")
+     * @Route("/admin", name="app_admin")
      */
     public function admin()
     {

@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/user", name="user")
+     * @Route("/user", name="app_user")
      */
     public function index()
     {
@@ -23,7 +23,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/profil/show/{slug}", name="user_profil_show")
+     * @Route("/user/profil/show/{slug}", name="app_user_profil_show")
      */
     public function showProfil(User $user)
     {
@@ -33,7 +33,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/user/profil/edit/{pseudo}", name="user_profil_edit", methods={"GET","POST"})
+     * @Route("/user/profil/edit/{slug}", name="app_user_profil_edit", methods={"GET","POST"})
      */
     public function editProfil(User $user, Request $request, SluggerInterface $slugger): Response
     {

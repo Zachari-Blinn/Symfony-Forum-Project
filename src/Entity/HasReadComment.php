@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\HasReadTopicRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\HasReadCommentRepository")
  */
-class HasReadTopic
+class HasReadComment
 {
     /**
      * @ORM\Id()
@@ -17,14 +17,14 @@ class HasReadTopic
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="hasReadTopics")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="hasReadComments")
      */
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Topic", inversedBy="hasReadTopics")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Comment", inversedBy="hasReadComments")
      */
-    private $topic;
+    private $comment;
 
     public function getId(): ?int
     {
@@ -43,14 +43,14 @@ class HasReadTopic
         return $this;
     }
 
-    public function getTopic(): ?Topic
+    public function getComment(): ?Comment
     {
-        return $this->topic;
+        return $this->comment;
     }
 
-    public function setTopic(?Topic $topic): self
+    public function setComment(?Comment $comment): self
     {
-        $this->topic = $topic;
+        $this->comment = $comment;
 
         return $this;
     }

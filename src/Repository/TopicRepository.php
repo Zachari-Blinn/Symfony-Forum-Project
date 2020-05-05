@@ -47,24 +47,4 @@ class TopicRepository extends ServiceEntityRepository
         ;
     }
     */
-
-    /**
-     * Undocumented function
-     *
-     * @param [type] $topic
-     * @return integer
-     */
-    public function findVuesByTopic($topic): int
-    {
-        $entityManager = $this->getEntityManager();
-
-        $query = $entityManager->createQuery(
-            'SELECT COUNT(h)
-             FROM App\Entity\Topic t
-             JOIN t.hasReadTopics h
-             WHERE h.topic = :topic'
-            )->setParameter('topic', $topic);
-
-        return $query->getSingleScalarResult();
-    }
 }
