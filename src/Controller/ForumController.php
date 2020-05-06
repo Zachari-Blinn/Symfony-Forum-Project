@@ -45,4 +45,20 @@ class ForumController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/forum/delete/{slug}", name="forum_delete", methods={"DELETE"})  
+     */
+    public function deleteParty(Forum $forum, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $this->denyAccessUnlessGranted('DELETE', $forum);
+
+        if ($this->isCsrfTokenValid('delete'.$forum->getId(), $request->request->get('_token')))
+        {
+            $entityManager->remove($forum);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_default');
+    }
 }

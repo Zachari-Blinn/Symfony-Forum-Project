@@ -69,4 +69,21 @@ class CategoryController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/category/delete/{slug}", name="category_delete", methods={"DELETE"})  
+     */
+    public function deleteParty(Category $category, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $this->denyAccessUnlessGranted('DELETE', $category);
+
+        if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token')))
+        {
+            $entityManager->remove($category);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_default');
+    }
+
 }

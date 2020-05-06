@@ -29,7 +29,7 @@ class PartyController extends AbstractController
 
     /**
      * @Route("/party/new", name="app_party_new", methods={"GET","POST"})
-     * @Route("/party/edit", name="app_party_edit", methods={"GET","POST"})
+     * @Route("/party/edit/{slug}", name="app_party_edit", methods={"GET","POST"})
      */
     public function newOrEdit(Party $party = null, Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -112,4 +112,21 @@ class PartyController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/party/delete/{slug}", name="party_delete", methods={"DELETE"})  
+     */
+    public function deleteParty(Party $party, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $this->denyAccessUnlessGranted('DELETE', $party);
+
+        if ($this->isCsrfTokenValid('delete'.$party->getId(), $request->request->get('_token')))
+        {
+            $entityManager->remove($party);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_default');
+    }
+
 }

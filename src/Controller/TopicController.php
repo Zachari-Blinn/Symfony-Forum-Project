@@ -20,7 +20,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class TopicController extends AbstractController
 {
     /**
-     * @Route("/topic/show/{id}/{page}", name="app_topic_show", methods={"GET","POST"})
+     * @Route("/topic/show/{id}/{page}", name="app_topic_show", methods={"GET"})
      */
     public function show(Topic $topic, Comment $comment = null, HasReadTopicRepository $hasReadTopicRepository, TopicRepository $topicRepository, PaginatorInterface $paginator, Request $request, $page, EntityManagerInterface $entityManager): Response
     {
@@ -109,4 +109,37 @@ class TopicController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/topic/delete/{id}", name="topic_delete", methods={"DELETE"})  
+     */
+    public function deleteTopic(Topic $topic, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $this->denyAccessUnlessGranted('DELETE', $topic);
+
+        if ($this->isCsrfTokenValid('delete'.$topic->getId(), $request->request->get('_token')))
+        {
+            $entityManager->remove($topic);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_default');
+    }
+
+    /**
+     * @Route("/topic/{topic}/delete/{id}", name="topic_comment_delete", methods={"DELETE"})  
+     */
+    public function deleteComment(Comment $comment, EntityManagerInterface $entityManager, Request $request): Response
+    {
+        $this->denyAccessUnlessGranted('DELETE', $comment);
+
+        if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token')))
+        {
+            $entityManager->remove($comment);
+            $entityManager->flush();
+        }
+
+        return $this->redirectToRoute('app_default');
+    }
+
 }
