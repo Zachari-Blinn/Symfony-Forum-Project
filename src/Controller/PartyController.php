@@ -63,6 +63,8 @@ class PartyController extends AbstractController
     }
 
     /**
+     * New or edit participate at party
+     * 
      * @Route("/party/participate/new/{party}", name="app_party_participate", methods={"GET","POST"})
      * @Route("/party/participate/edit/{party}", name="app_party_participate", methods={"GET","POST"})
      */
@@ -84,17 +86,12 @@ class PartyController extends AbstractController
         if($currentUser)
         {
             $auth = true;
-            $participate = $participateRepository->findOneBy([
-                'party' => $party->getId(),
-                'user' => $currentUser->getId()
-            ]);
+            $participate = $participateRepository->findOneBy(['party' => $party->getId(), 'user' => $currentUser->getId()]);
         }
         
         if(!$participate) $participate = new Participate($party, $currentUser);
         
-        $form = $this->createForm(ParticipateType::class, $participate, [
-            'auth' => $auth
-        ]);
+        $form = $this->createForm(ParticipateType::class, $participate, ['auth' => $auth]);
 
         $form->handleRequest($request);
 

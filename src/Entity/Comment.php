@@ -52,8 +52,8 @@ class Comment
     public function __construct(Topic $topic)
     {
         $this->setTopic($topic);
-        $this->setCreatedAt(new \DateTime());
-        $this->setUpdatedAt(new \DateTime());
+        $this->setCreatedAt(new \DateTime('now'));
+        $this->setUpdatedAt(new \DateTime('now'));
     }
 
     public function getId(): ?int

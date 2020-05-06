@@ -32,9 +32,7 @@ class TopicController extends AbstractController
 
         $views = $topicRepository->findViewsByTopic($topic);
 
-        $data = $this->getDoctrine()->getRepository(Comment::class)->findBy([
-            'topic' => $topic->getId(),
-        ]);
+        $data = $this->getDoctrine()->getRepository(Comment::class)->findBy(['topic' => $topic->getId()]);
         
         $comments = $paginator->paginate($data, $request->query->getInt('page', $page), 18);
 
@@ -57,20 +55,18 @@ class TopicController extends AbstractController
             $entityManager->flush();
         }
 
-        $form = $this->createForm(CommentType::class, $comment, [
-            'isAuth' => $isAuth,
-        ]);
+        $form = $this->createForm(CommentType::class, $comment, ['isAuth' => $isAuth]);
 
-        if ($form->isSubmitted() && $form->isValid())
+        $form->handleRequest($request);
+
+        if($form->isSubmitted() && $form->isValid())
         {
             $entityManager->persist($comment);
             $entityManager->flush();
 
             // $this->addFlash('success', 'Commentaire créée avec succes !');
 
-            return $this->redirectToRoute('topic_show', [
-                'id' => $topic->getId(),
-            ]);
+            return $this->redirectToRoute('app_topic_show', ['id' => $topic->getId(), 'page' => 1]);
         }
 
         return $this->render('topic/show.html.twig', [
@@ -82,6 +78,8 @@ class TopicController extends AbstractController
     }
 
     /**
+     * New or edit topic entity
+     * 
      * @Route("/topic/new/{category}", name="app_topic_new", methods={"GET","POST"})
      * @Route("/topic/edit/{topic}", name="app_topic_edit", methods={"GET","POST"})
      */
@@ -104,7 +102,7 @@ class TopicController extends AbstractController
 
             // $this->addFlash('success', 'Topic créée avec succes !');
 
-            return $this->redirectToRoute('default');
+            return $this->redirectToRoute('app_default');
         }
 
         return $this->render('topic/newOrEdit.html.twig', [

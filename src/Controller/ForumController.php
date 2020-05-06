@@ -14,6 +14,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ForumController extends AbstractController
 {
     /**
+     * New or edit forum entity
+     * 
      * @Route("/forum/new", name="app_forum_new", methods={"GET","POST"})
      * @Route("/forum/edit/{slug}", name="app_forum_edit", methods={"GET","POST"})
      */
@@ -36,7 +38,7 @@ class ForumController extends AbstractController
 
             $this->addFlash('success', 'Création de Forum avec succes');
 
-            return $this->redirectToRoute('default');
+            return $this->redirectToRoute('app_default');
         }
 
         return $this->render('forum/newOrEdit.html.twig', [

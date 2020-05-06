@@ -91,6 +91,7 @@ class Party
     public function __construct()
     {
         $this->participates = new ArrayCollection();
+        $this->setUpdatedAt(new \DateTime('now'));
     }
 
     public function getId(): ?int

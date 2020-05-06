@@ -25,11 +25,7 @@ class CategoryController extends AbstractController
             'category' => $category->getId(),
         ]);
 
-        $topics = $paginator->paginate(
-            $data, // Requête contenant les données à paginer (ici nos articles)
-            $request->query->getInt('page', $page), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
-            8 // Nombre de résultats par page
-        );
+        $topics = $paginator->paginate($data, $request->query->getInt('page', $page), 8);
 
         return $this->render('category/index.html.twig', [
             'category' => $category,
@@ -38,6 +34,8 @@ class CategoryController extends AbstractController
     }
 
     /**
+     * New or edit category entity
+     * 
      * @Route("/category/new/{forum}", name="app_category_new", methods={"GET","POST"})
      * @Route("/category/edit/{forum}/{category}", name="app_category_edit", methods={"GET","POST"})
      */

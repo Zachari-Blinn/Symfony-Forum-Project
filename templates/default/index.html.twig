@@ -49,7 +49,7 @@
         </span>
         <div class="table">
             {% for forum in forums %}
-            <div id="card" class="card shadow mb-3">
+            <div id="card" class="container-fluid card shadow mb-3">
                 <div class="card-body">
                     <span class="float-left">
                         <h3 class="card-title">{{forum.title|raw}}</h3>
@@ -98,23 +98,24 @@
                                 </div>
                             </tr>
                             {% else %}
-                            <div class="alert alert-danger m-3" role="alert">
-                                <i class="fas fa-exclamation-triangle"></i>
-                                Aucune donnée
-                            </div>
+                            <div class="alert alert-success m-3" role="alert">
+                                <i class="fas fa-coffee"></i></i>
+                                <span class="p-4">
+                                   Soyez la première personne à ajouter une catégorie dans ce forum !
+                               </span>
+                           </div>
                             {% endfor %}
                         </tbody>
                     </table>
                 </div>
             </div>
             {% else %}
-            <div class="alert alert-danger" role="alert">
-                <i class="fas fa-exclamation-triangle"></i>
-                Aucune donnée
-                <button style="color: white;" type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
+            <div class="alert alert-success m-3" role="alert">
+                <i class="fas fa-coffee"></i></i>
+                <span class="p-4">
+                   Soyez la première personne à ajouter un forum sur ce site !
+               </span>
+           </div>
             {% endfor %}
         </div>
 

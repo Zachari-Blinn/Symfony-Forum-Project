@@ -34,6 +34,8 @@ class UserController extends AbstractController
     }
 
     /**
+     * Edit user page
+     * 
      * @Route("/user/profil/edit/{pseudo}", name="app_user_profil_edit", methods={"GET","POST"})
      */
     public function editProfil(User $user, Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response

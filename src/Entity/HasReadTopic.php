@@ -31,6 +31,11 @@ class HasReadTopic
      */
     private $updatedAt;
 
+    public function __construct()
+    {
+        $this->setUpdatedAt(new \DateTime('now'));
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -44,7 +44,7 @@
                 </span>
             </span>
             <div class="table">
-                <div id="card" class="card shadow mb-3">
+                <div id="card" class="container-fluid card shadow mb-3">
                     <div class="card-body">
                         <span class="float-left">
                             <h3 class="card-title">{{category.title|raw}}</h3>
@@ -107,8 +107,10 @@
                                 </tr>
                                 {% else %}
                                 <div class="alert alert-success m-3" role="alert">
-                                    <i class="fas fa-coffee"></i></i>
-                                     Soyez la première personne à écrire un sujet sur cette catégorie !
+                                     <i class="fas fa-coffee"></i></i>
+                                     <span class="p-4">
+                                        Soyez la première personne à écrire un sujet sur cette catégorie !
+                                    </span>
                                 </div>
                                 {% endfor %}
                             </tbody>

@@ -23,11 +23,18 @@
         <div class="col-md-12">
 
             <span>
-                <a id="btn-back" type="button" class="btn btn-circle" href="{{ path('app_default') }}"><i class="fas fa-home"></i></i></a>
+                <a id="btn-back" type="button" class="btn btn-circle" href="{{ path('app_default') }}"><i
+                        class="fas fa-home"></i></i></a>
                 <span>
-                    <a class="white" href="{{ path('app_default') }}">Accueil</a> <i class="fas fa-arrow-right"></i> <a class="white" href="{{ path('app_default') }}">{{ topic.category.forum.title|raw }}</a> <i class="fas fa-arrow-right"></i> <a class="white" href="{{ path('app_category', {'slug': topic.category.slug, 'page': 1}) }}">{{ topic.category.title|raw }}</a> <i class="fas fa-arrow-right"></i> <font class="font-weight-bold">{{ topic.title }}</font>
+                    <a class="white" href="{{ path('app_default') }}">Accueil</a> <i class="fas fa-arrow-right"></i> <a
+                        class="white" href="{{ path('app_default') }}">{{ topic.category.forum.title|raw }}</a> <i
+                        class="fas fa-arrow-right"></i> <a class="white"
+                        href="{{ path('app_category', {'slug': topic.category.slug, 'page': 1}) }}">{{ topic.category.title|raw }}</a>
+                    <i class="fas fa-arrow-right"></i>
+                    <font class="font-weight-bold">{{ topic.title }}</font>
                     <span>
-                        <a id="btn-success" type="button" class="btn float-right" href="#repondre"><i class="fas fa-feather-alt"></i> Répondre</a>
+                        <a id="btn-success" type="button" class="btn float-right" href="#repondre"><i
+                                class="fas fa-feather-alt"></i> Répondre</a>
                     </span>
                 </span>
             </span>
@@ -38,25 +45,29 @@
             <article>
                 <div class="media">
                     <img src="..." class="align-self-start mr-3" alt="...">
-                    <div id="card" class="card shadow mb-3 p-3">
+                    <div id="card" class="container-fluid card shadow mb-3 p-3">
                         <div class="media-body">
                             <span>
                                 <h3 id="topic-title" class="float-left">{{ topic.title|raw }}</h3>
                                 <span>
-                                    <small id="topic-publishedAt" class="float-left"> le {{ topic.createdAt|date("m/d/Y") }}</small>
+                                    <small id="topic-publishedAt" class="float-left"> le
+                                        {{ topic.createdAt|date("m/d/Y") }}</small>
                                 </span>
                             </span>
                             <br><br>
                             <section>{{ topic.content|raw }}</section>
                         </div>
                         <span>
-                            <a id="btn-danger" type="button" class="btn btn-circle float-right" href="#"><i class="fas fa-trash-alt"></i></a>
-                            <a id="btn-warning" type="button" class="btn btn-circle float-right" href="{{ path('app_topic_edit', {'topic': topic.id}) }}"><i class="fas fa-wrench"></i></a>
+                            <a id="btn-danger" type="button" class="btn btn-circle float-right" href="#"><i
+                                    class="fas fa-trash-alt"></i></a>
+                            <a id="btn-warning" type="button" class="btn btn-circle float-right"
+                                href="{{ path('app_topic_edit', {'topic': topic.id}) }}"><i
+                                    class="fas fa-wrench"></i></a>
                         </span>
                     </div>
                 </div>
             </article>
-            
+
             <br>
 
             {% for comment in comments %}
@@ -70,14 +81,15 @@
                                     <h6 id="comment-title" class="float-left">
                                         {% if comment.user is defined and comment.user is not null  %}
                                         {{ comment.user.pseudo }}
-                                            <span id="badge-anonyme" class="badge badge-success">Utilisateur</span>
+                                        <span id="badge-anonyme" class="badge badge-success">Utilisateur</span>
                                         {% else %}
                                         {{ comment.author }}
-                                            <span id="badge-anonyme" class="badge badge-secondary">Anonyme</span>
+                                        <span id="badge-anonyme" class="badge badge-secondary">Anonyme</span>
                                         {% endif %}
                                     </h6>
                                     <span>
-                                        <small id="comment-publishedAt" class="float-left">le {{ comment.createdAt|date("m/d/Y") }}</small>
+                                        <small id="comment-publishedAt" class="float-left">le
+                                            {{ comment.createdAt|date("m/d/Y") }}</small>
                                     </span>
                                 </span>
                             </div>
@@ -92,14 +104,14 @@
 
             <div class="media">
                 <img src="..." class="align-self-start mr-3" alt="...">
-                <div id="card" class="d-inline-flexcard shadow mb-3 p-3">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis suscipit, at illo eaque velit alias officiis quod omnis numquam dolores aliquam sint, incidunt et qui, adipisci consequatur reprehenderit eligendi quas.</p>
+                <div id="card" class="container-fluid d-inline-flexcard shadow mb-3 p-3">
                     <section id="repondre">
                         {{ form_start(form) }}
                         {{ form_errors(form) }}
                         {{ form_rest(form) }}
                         <span>
-                            <button id="btn-success" type="submit" class="btn float-right"><i class="fas fa-feather-alt"></i> Répondre</button>
+                            <button id="btn-success" type="submit" class="btn float-right"><i
+                                    class="fas fa-feather-alt"></i> Répondre</button>
                         </span>
                         {{ form_end(form) }}
                     </section>
