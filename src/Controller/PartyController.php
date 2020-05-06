@@ -8,6 +8,7 @@ use App\Form\PartyType;
 use App\Entity\Participate;
 use App\Form\ParticipateType;
 use App\Repository\PartyRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\ParticipateRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -30,7 +31,7 @@ class PartyController extends AbstractController
      * @Route("/party/new", name="app_party_new", methods={"GET","POST"})
      * @Route("/party/edit", name="app_party_edit", methods={"GET","POST"})
      */
-    public function newOrEdit(Party $party = null, Request $request): Response
+    public function newOrEdit(Party $party = null, Request $request, EntityManagerInterface $entityManager): Response
     {
         if(!$party) $party = new Party();
 
@@ -40,8 +41,6 @@ class PartyController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $entityManager = $this->getDoctrine()->getManager();
-
             $entityManager->persist($party);
             $entityManager->flush();
 
@@ -67,7 +66,7 @@ class PartyController extends AbstractController
      * @Route("/party/participate/new/{party}", name="app_party_participate", methods={"GET","POST"})
      * @Route("/party/participate/edit/{party}", name="app_party_participate", methods={"GET","POST"})
      */
-    public function participate(Party $party, ParticipateRepository $participateRepository, Request $request): Response
+    public function participate(Party $party, ParticipateRepository $participateRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
         $currentUser = $this->getUser();
         $auth = false;
@@ -105,8 +104,6 @@ class PartyController extends AbstractController
             {
                 throw $this->createNotFoundException('Désolé, vous ne pouvez plus rejoindre cette partie');
             }
-
-            $entityManager = $this->getDoctrine()->getManager();
 
             $entityManager->persist($participate);
             $entityManager->flush();

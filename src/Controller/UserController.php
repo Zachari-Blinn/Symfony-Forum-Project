@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\ProfilType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,7 +36,7 @@ class UserController extends AbstractController
     /**
      * @Route("/user/profil/edit/{pseudo}", name="app_user_profil_edit", methods={"GET","POST"})
      */
-    public function editProfil(User $user, Request $request, SluggerInterface $slugger): Response
+    public function editProfil(User $user, Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ProfilType::class, $user);
 
@@ -64,7 +65,8 @@ class UserController extends AbstractController
                 $user->setImageFilename($newFilename);
             }
 
-            // todo persist
+            $entityManager->persist($user);
+            $entityManager->flush();
 
             return $this->redirect($this->generateUrl('default'));
         }

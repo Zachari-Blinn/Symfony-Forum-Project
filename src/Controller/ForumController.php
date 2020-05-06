@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Forum;
 use App\Form\ForumType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -16,7 +17,7 @@ class ForumController extends AbstractController
      * @Route("/forum/new", name="app_forum_new", methods={"GET","POST"})
      * @Route("/forum/edit/{slug}", name="app_forum_edit", methods={"GET","POST"})
      */
-    public function newOrEdit(Forum $forum = null, Request $request): Response
+    public function newOrEdit(Forum $forum = null, Request $request, EntityManagerInterface $entityManager): Response
     {
         if(!$forum) $forum = new Forum();
         
@@ -28,8 +29,6 @@ class ForumController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $entityManager = $this->getDoctrine()->getManager();
-
             $forum->setSlug($slugger->slug($forum->getTitle()));
 
             $entityManager->persist($forum);

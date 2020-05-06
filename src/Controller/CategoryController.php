@@ -6,6 +6,7 @@ use App\Entity\Forum;
 use App\Entity\Topic;
 use App\Entity\Category;
 use App\Form\CategoryType;
+use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,7 +41,7 @@ class CategoryController extends AbstractController
      * @Route("/category/new/{forum}", name="app_category_new", methods={"GET","POST"})
      * @Route("/category/edit/{forum}/{category}", name="app_category_edit", methods={"GET","POST"})
      */
-    public function newOrEdit(Forum $forum, Category $category = null, Request $request): Response
+    public function newOrEdit(Forum $forum, Category $category = null, Request $request, EntityManagerInterface $entityManager): Response
     {
         $currentRoute = $request->attributes->get('_route');
 
@@ -56,8 +57,6 @@ class CategoryController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $entityManager = $this->getDoctrine()->getManager();
-
             $category->setSlug($slugger->slug($category->getTitle()));
 
             $entityManager->persist($category);

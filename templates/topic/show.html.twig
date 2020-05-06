@@ -59,7 +59,7 @@
             
             <br>
 
-            {% for comment in topic.comments %}
+            {% for comment in comments %}
             <article>
                 <div class="media">
                     <img src="..." class="align-self-start mr-3" alt="...">
@@ -105,7 +105,9 @@
                     </section>
                 </div>
             </div>
-
+            <div class="pagination">
+                {{ knp_pagination_render(comments) }}
+            </div>
         </div>
     </div>
 </div>

@@ -54,7 +54,7 @@ class TopicRepository extends ServiceEntityRepository
      * @param [type] $topic
      * @return integer
      */
-    public function findVuesByTopic($topic): int
+    public function findViewsByTopic($topic): int
     {
         $entityManager = $this->getEntityManager();
 
