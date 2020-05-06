@@ -21,7 +21,7 @@ class TopicType extends AbstractType
             ])
             ->add('content', CKEditorType::class, [
                 'label' => 'Contenu',
-                'required' => true
+                'required' => true,
             ])
             ->add('type', ChoiceType::class, [
 
