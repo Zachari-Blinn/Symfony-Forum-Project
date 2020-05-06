@@ -25,7 +25,7 @@
             <span>
                 <a id="btn-back" type="button" class="btn btn-circle" href="{{ path('app_default') }}"><i class="fas fa-home"></i></i></a>
                 <span>
-                    <a class="white" href="{{ path('app_default') }}">Accueil</a> <i class="fas fa-arrow-right"></i> <a class="white" href="{{ path('app_default') }}">{{ topic.category.forum.title|raw }}</a> <i class="fas fa-arrow-right"></i> <a class="white" href="{{ path('app_category', {'slug': topic.category.slug}) }}">{{ topic.category.title|raw }}</a> <i class="fas fa-arrow-right"></i> <font class="font-weight-bold">{{ topic.title }}</font>
+                    <a class="white" href="{{ path('app_default') }}">Accueil</a> <i class="fas fa-arrow-right"></i> <a class="white" href="{{ path('app_default') }}">{{ topic.category.forum.title|raw }}</a> <i class="fas fa-arrow-right"></i> <a class="white" href="{{ path('app_category', {'slug': topic.category.slug, 'page': 1}) }}">{{ topic.category.title|raw }}</a> <i class="fas fa-arrow-right"></i> <font class="font-weight-bold">{{ topic.title }}</font>
                     <span>
                         <a id="btn-success" type="button" class="btn float-right" href="#repondre"><i class="fas fa-feather-alt"></i> Répondre</a>
                     </span>

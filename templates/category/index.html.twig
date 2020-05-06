@@ -21,14 +21,8 @@
 <div class="container-fluid">
     <div class="row">
         <!-- first -->
-        <div class="col-md-3 pl-5">
-            <div id="card" class="card shadow mb-3">
-                <div class="card-body">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum nisi non repudiandae fugiat
-                        aspernatur exercitationem voluptatem voluptate quae, facere veniam? Quisquam eos dignissimos
-                        deleniti nulla architecto hic possimus autem exercitationem.</p>
-                </div>
-            </div>
+        <div class="col-md-3">
+            {% block comment %}{% include "block/_comment.html.twig" %}{% endblock %}
         </div>
         <!-- end first -->
 
