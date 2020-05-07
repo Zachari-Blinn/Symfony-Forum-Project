@@ -107,6 +107,11 @@ class User implements UserInterface
      */
     private $parties;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=City::class, inversedBy="users")
+     */
+    private $city;
+
     public function __construct()
     {
         $this->topics = new ArrayCollection();
@@ -473,6 +478,18 @@ class User implements UserInterface
                 $party->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCity(): ?City
+    {
+        return $this->city;
+    }
+
+    public function setCity(?City $city): self
+    {
+        $this->city = $city;
 
         return $this;
     }

@@ -11,6 +11,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Topic|null findOneBy(array $criteria, array $orderBy = null)
  * @method Topic[]    findAll()
  * @method Topic[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Topic|null findViewsByTopic($topic)
  */
 class TopicRepository extends ServiceEntityRepository
 {

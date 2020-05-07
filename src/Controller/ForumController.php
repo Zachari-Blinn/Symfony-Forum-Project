@@ -51,7 +51,7 @@ class ForumController extends AbstractController
      */
     public function deleteParty(Forum $forum, EntityManagerInterface $entityManager, Request $request): Response
     {
-        $this->denyAccessUnlessGranted('DELETE', $forum);
+        $this->denyAccessUnlessGranted('delete', $forum);
 
         if ($this->isCsrfTokenValid('delete'.$forum->getId(), $request->request->get('_token')))
         {

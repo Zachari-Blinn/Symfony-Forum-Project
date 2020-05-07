@@ -86,13 +86,20 @@
                                                 {{ category.topic|length }}</p>
                                             </n>
                                             {% if category.topic|length <= 1 %}
-                                            <p class="text-center font-weight-light">sujet</p>
+                                                <p class="text-center font-weight-light">sujet</p>
                                             {% else %}
-                                            <p class="text-center font-weight-light">sujets</p>
+                                                <p class="text-center font-weight-light">sujets</p>
                                             {% endif %}
                                         </td>
                                         <td class="col-3">
-                                            <!-- TODO -->
+                                            <p id="topic-message" class="text-center font-weight-bold">
+                                                {{ messages(category) }}</p>
+                                            </n>
+                                            {% if messages(category) <= 1 %}
+                                                <p class="text-center font-weight-light">message</p>
+                                            {% else %}
+                                                <p class="text-center font-weight-light">messages</p>
+                                            {% endif %}
                                         </td>
                                     </div>
                                 </div>

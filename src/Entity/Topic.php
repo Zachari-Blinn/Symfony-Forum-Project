@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
+use App\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TopicRepository")
@@ -39,11 +40,6 @@ class Topic
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $type;
-
-    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="topic")
      */
     private $category;
@@ -73,7 +69,17 @@ class Topic
      */
     private $slug;
 
-    public function __construct(Category $category)
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $isPinned;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $allowAnonymous;
+
+    public function __construct(Category $category, User $user)
     {
         $this->hasReadTopics = new ArrayCollection();
         $this->setCreatedAt(new \DateTime());
@@ -81,6 +87,9 @@ class Topic
         $this->setIsActive(true);
         $this->setCategory($category);
         $this->comments = new ArrayCollection();
+        $this->setUser($user);
+        $this->setIsPinned(false);
+        $this->setAllowAnonymous(true);
     }
 
     public function getId(): ?int
@@ -132,18 +141,6 @@ class Topic
     public function setUpdatedAt(\DateTimeInterface $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
-
-        return $this;
-    }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(?string $type): self
-    {
-        $this->type = $type;
 
         return $this;
     }
@@ -254,6 +251,30 @@ class Topic
     public function setSlug(?string $slug): self
     {
         $this->slug = $slug;
+
+        return $this;
+    }
+
+    public function getIsPinned(): ?bool
+    {
+        return $this->isPinned;
+    }
+
+    public function setIsPinned(?bool $isPinned): self
+    {
+        $this->isPinned = $isPinned;
+
+        return $this;
+    }
+
+    public function getAllowAnonymous(): ?bool
+    {
+        return $this->allowAnonymous;
+    }
+
+    public function setAllowAnonymous(bool $allowAnonymous): self
+    {
+        $this->allowAnonymous = $allowAnonymous;
 
         return $this;
     }

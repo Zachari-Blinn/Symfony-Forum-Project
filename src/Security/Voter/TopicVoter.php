@@ -24,7 +24,8 @@ class TopicVoter extends Voter
         }
 
         // only vote on `Topic` objects
-        if (!$subject instanceof Topic) {
+        if (!$subject instanceof Topic)
+        {
             return false;
         }
 
@@ -35,7 +36,8 @@ class TopicVoter extends Voter
     {
         $user = $token->getUser();
 
-        if (!$user instanceof User) {
+        if (!$user instanceof User)
+        {
             // the user must be logged in; if not, deny access
             return false;
         }
@@ -58,13 +60,13 @@ class TopicVoter extends Voter
 
     private function canView(Topic $topic, User $user)
     {
-
+        return true;
     }
 
     private function canEdit(Topic $topic, User $user)
     {
         // si l'utilisateur est le propriétaire
-        return $user === $topic->getUser();
+        if($user === $topic->getUser()) return true;
     }
 
     private function canDelete(Topic $topic, User $user)

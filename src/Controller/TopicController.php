@@ -15,15 +15,18 @@ use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TopicController extends AbstractController
 {
     /**
-     * @Route("/topic/show/{id}/{page}", name="app_topic_show", methods={"GET"})
+     * @Route("/topic/show/{slug}/{page}", name="app_topic_show", methods={"GET","POST"})
      */
     public function show(Topic $topic, Comment $comment = null, HasReadTopicRepository $hasReadTopicRepository, TopicRepository $topicRepository, PaginatorInterface $paginator, Request $request, $page, EntityManagerInterface $entityManager): Response
     {
+        // $this->denyAccessUnlessGranted('VIEW', $topic);
+
         $comment = new Comment($topic);
 
         $form = $this->createForm(CommentType::class, $comment);
@@ -87,16 +90,27 @@ class TopicController extends AbstractController
     {
         $currentRoute = $request->attributes->get('_route');
 
-        if($currentRoute == "topic_new") $topic = null;
-
-        if(!$topic) $topic = new Topic($category);
+        if($currentRoute == "app_topic_new")
+        {
+            $topic = null;
+            $currentUser = $this->getUser();
+            $topic = new Topic($category, $currentUser);
+        }
+        else
+        {
+            $this->denyAccessUnlessGranted('edit', $topic);
+        }
         
         $form = $this->createForm(TopicType::class, $topic);
 
         $form->handleRequest($request);
 
+        $slugger = new AsciiSlugger();
+
         if ($form->isSubmitted() && $form->isValid())
         {
+            $topic->setSlug($slugger->slug($topic->getTitle()));
+
             $entityManager->persist($topic);
             $entityManager->flush();
 
@@ -115,7 +129,7 @@ class TopicController extends AbstractController
      */
     public function deleteTopic(Topic $topic, EntityManagerInterface $entityManager, Request $request): Response
     {
-        $this->denyAccessUnlessGranted('DELETE', $topic);
+        $this->denyAccessUnlessGranted('delete', $topic);
 
         if ($this->isCsrfTokenValid('delete'.$topic->getId(), $request->request->get('_token')))
         {
@@ -131,7 +145,7 @@ class TopicController extends AbstractController
      */
     public function deleteComment(Comment $comment, EntityManagerInterface $entityManager, Request $request): Response
     {
-        $this->denyAccessUnlessGranted('DELETE', $comment);
+        $this->denyAccessUnlessGranted('delete', $comment);
 
         if ($this->isCsrfTokenValid('delete'.$comment->getId(), $request->request->get('_token')))
         {

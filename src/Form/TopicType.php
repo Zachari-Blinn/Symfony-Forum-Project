@@ -9,6 +9,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class TopicType extends AbstractType
 {
@@ -23,8 +24,13 @@ class TopicType extends AbstractType
                 'label' => 'Contenu',
                 'required' => true,
             ])
-            ->add('type', ChoiceType::class, [
-
+            ->add('isPinned', CheckboxType::class, [
+                'label' => 'Epingler le sujet',
+                'required' => true,
+            ])
+            ->add('allowAnonymous', CheckboxType::class, [
+                'label' => 'Commentaires anonymes',
+                'required' => true,
             ])
         ;
     }

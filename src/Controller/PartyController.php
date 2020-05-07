@@ -33,6 +33,8 @@ class PartyController extends AbstractController
      */
     public function newOrEdit(Party $party = null, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('edit', $party);
+
         if(!$party) $party = new Party();
 
         $form = $this->createForm(PartyType::class, $party);
@@ -57,6 +59,8 @@ class PartyController extends AbstractController
      */
     public function show(Party $party): Response
     {
+        $this->denyAccessUnlessGranted('view', $party);
+
         return $this->render('party/newOrEdit.html.twig', [
             'party' => $party,
         ]);
@@ -70,18 +74,11 @@ class PartyController extends AbstractController
      */
     public function participate(Party $party, ParticipateRepository $participateRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('PARTICIPATE', $party);
+
         $currentUser = $this->getUser();
         $auth = false;
         $participate = null;
-
-        if($party->getIsAtive() == false || new \DateTime('now') > $party->getExpireAt() || new \DateTime('now') > $party->getPartyAt())
-        {
-            throw $this->createNotFoundException('Désolé, vous ne pouvez pas rejoindre cette partie');
-        }
-        if($party->getAllowAnonymous() == false && $currentUser == null)
-        {
-            return $this->redirectToRoute('app_login');
-        }
 
         if($currentUser)
         {
@@ -97,10 +94,7 @@ class PartyController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            if($party->getIsAtive() == false || new \DateTime('now') > $party->getExpireAt() || new \DateTime('now') > $party->getPartyAt())
-            {
-                throw $this->createNotFoundException('Désolé, vous ne pouvez plus rejoindre cette partie');
-            }
+            $this->denyAccessUnlessGranted('PARTICIPATE', $party);
 
             $entityManager->persist($participate);
             $entityManager->flush();

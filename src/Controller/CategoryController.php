@@ -75,7 +75,7 @@ class CategoryController extends AbstractController
      */
     public function deleteParty(Category $category, EntityManagerInterface $entityManager, Request $request): Response
     {
-        $this->denyAccessUnlessGranted('DELETE', $category);
+        $this->denyAccessUnlessGranted('delete', $category);
 
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token')))
         {

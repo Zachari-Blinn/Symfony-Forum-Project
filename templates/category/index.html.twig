@@ -72,7 +72,7 @@
                                             <th scope="row"><i id="bookmark" class="col-1 far fa-bookmark"></i>
                                             </th>
                                             <td class="col-6">
-                                                <a href="{{ path('app_topic_show', {'id': topic.id, 'page': 1}) }}">
+                                                <a href="{{ path('app_topic_show', {'slug': topic.slug, 'page': 1}) }}">
                                                     <h6>{{ topic.title }}</h6>
                                                 </a>
                                                 </n>
@@ -91,7 +91,7 @@
                                                 {% endif %}
                                             </td>
                                             <td class="col-1">
-                                                <p id="topic-message" class="text-center font-weight-bold">0</p>
+                                                <p id="topic-message" class="text-center font-weight-bold">{{ views(topic) }}</p>
                                                 </n>
                                                 {% if topic.comments|length <= 1 %}
                                                 <p class="text-center font-weight-light">vue</p>

@@ -36,7 +36,7 @@ class UserController extends AbstractController
     /**
      * Edit user page
      * 
-     * @Route("/user/profil/edit/{pseudo}", name="app_user_profil_edit", methods={"GET","POST"})
+     * @Route("/user/profil/edit/{id}", name="app_user_profil_edit", methods={"GET","POST"})
      */
     public function editProfil(User $user, Request $request, SluggerInterface $slugger, EntityManagerInterface $entityManager): Response
     {
@@ -70,7 +70,7 @@ class UserController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            return $this->redirect($this->generateUrl('default'));
+            return $this->redirect($this->generateUrl('app_default'));
         }
 
         return $this->render('user/edit.html.twig', [

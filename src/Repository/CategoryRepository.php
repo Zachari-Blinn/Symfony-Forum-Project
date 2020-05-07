@@ -53,7 +53,7 @@ class CategoryRepository extends ServiceEntityRepository
     /**
      * Undocumented function
      *
-     * @param [type] $topic
+     * @param Topic $topic
      * @return integer
      */
     public function findVuesByTopic($topic): int
@@ -67,6 +67,27 @@ class CategoryRepository extends ServiceEntityRepository
              JOIN t.hasReadTopics h
              WHERE h.topic = :topic'
             )->setParameter('topic', $topic);
+
+        return $query->getSingleScalarResult();
+    }
+
+    /**
+     * Count all message on category
+     * 
+     * @param Category $category
+     * @return integer
+     */
+    public function countAllMessages($category): int
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT COUNT(comments)
+             FROM App\Entity\Category category
+             JOIN category.topic topic
+             JOIN topic.comments comments
+             WHERE category = :cat'
+            )->setParameter('cat', $category);
 
         return $query->getSingleScalarResult();
     }
