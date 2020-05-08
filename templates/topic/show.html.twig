@@ -27,11 +27,11 @@
                         class="fas fa-home"></i></i></a>
                 <span>
                     <a class="white" href="{{ path('app_default') }}">Accueil</a> <i class="fas fa-arrow-right"></i> <a
-                        class="white" href="{{ path('app_default') }}">{{ topic.category.forum.title|raw }}</a> <i
+                        class="white" href="{{ path('app_default') }}">{{ topic.getCategory().getForum().getTitle()|raw }}</a> <i
                         class="fas fa-arrow-right"></i> <a class="white"
-                        href="{{ path('app_category', {'slug': topic.category.slug, 'page': 1}) }}">{{ topic.category.title|raw }}</a>
+                        href="{{ path('app_category', {'slug': topic.getCategory().getSlug(), 'page': 1}) }}">{{ topic.getCategory().getTitle()|raw }}</a>
                     <i class="fas fa-arrow-right"></i>
-                    <font class="font-weight-bold">{{ topic.title }}</font>
+                    <font class="font-weight-bold">{{ topic.getTitle() }}</font>
                     <span>
                         <a id="btn-success" type="button" class="btn float-right" href="#repondre"><i
                                 class="fas fa-feather-alt"></i> Répondre</a>
@@ -44,24 +44,25 @@
             <!-- topic -->
             <article>
                 <div class="media">
-                    <img src="https://eu.ui-avatars.com/api/?rounded=true&background={{ colour(topic.user.pseudo) }}&color=fff&name={{ topic.user.pseudo|first }}" class="align-self-start mr-3" alt="...">
+                    <img src="https://eu.ui-avatars.com/api/?rounded=true&background={{ colour(topic.getUser().getPseudo()) }}&color=fff&name={{ topic.getUser().getPseudo()|first }}"
+                        class="align-self-start mr-3" alt="...">
                     <div id="card" class="container-fluid card shadow mb-3 p-3">
                         <div class="media-body">
                             <span>
-                                <h3 id="topic-title" class="float-left">{{ topic.title|raw }}</h3>
+                                <h3 id="topic-title" class="float-left">{{ topic.getTitle()|raw }}</h3>
                                 <span>
-                                    <small id="topic-publishedAt" class="float-left"> le
-                                        {{ topic.createdAt|date("m/d/Y") }}</small>
+                                    <small id="topic-publishedAt" class="float-left">
+                                        {{ topic.getCreatedAt()|ago }}</small>
                                 </span>
                             </span>
                             <br><br>
-                            <section>{{ topic.content|raw }}</section>
+                            <section>{{ topic.getContent()|raw }}</section>
                         </div>
                         <span>
                             <a id="btn-danger" type="button" class="btn btn-circle float-right" href="#"><i
                                     class="fas fa-trash-alt"></i></a>
                             <a id="btn-warning" type="button" class="btn btn-circle float-right"
-                                href="{{ path('app_topic_edit', {'topic': topic.id}) }}"><i
+                                href="{{ path('app_topic_edit', {'topic': topic.getId()}) }}"><i
                                     class="fas fa-wrench"></i></a>
                         </span>
                     </div>
@@ -73,32 +74,34 @@
             {% for comment in comments %}
             <article>
                 <div class="media">
-                    {% if comment.user is defined and comment.user is not null  %}
-                        <img src="https://eu.ui-avatars.com/api/?rounded=true&background={{ colour(topic.user.pseudo) }}&color=fff&name={{ comment.user.pseudo|first }}" class="align-self-start mr-3" alt="...">
+                    {% if comment.getUser() is defined and comment.getUser() is not null  %}
+                    <img src="https://eu.ui-avatars.com/api/?rounded=true&background={{ colour(topic.getUser().getPseudo()) }}&color=fff&name={{ comment.getUser().getPseudo()|first }}"
+                        class="align-self-start mr-3" alt="...">
                     {% else %}
-                        <img src="https://eu.ui-avatars.com/api/?rounded=true&background={{ colour(comment.author) }}&color=fff&name={{ comment.author|first }}" class="align-self-start mr-3" alt="...">
+                    <img src="https://eu.ui-avatars.com/api/?rounded=true&background={{ colour(comment.getAuthor()) }}&color=fff&name={{ comment.getAuthor()|first }}"
+                        class="align-self-start mr-3" alt="...">
                     {% endif %}
-                        <div id="card" class="container-fluid card shadow mb-4 p-3">
+                    <div id="card" class="container-fluid card shadow mb-4 p-3">
                         <section id="repondre">
                             <div id="header-comment">
                                 <span>
                                     <h6 id="comment-title" class="float-left">
-                                        {% if comment.user is defined and comment.user is not null  %}
-                                        {{ comment.user.pseudo }}
-                                        <span id="badge-anonyme" class="badge badge-success">Utilisateur</span>
+                                        {% if comment.getUser() is defined and comment.getUser() is not null  %}
+                                            {{ comment.getUser().getPseudo() }}
+                                            <span id="badge-anonyme" class="badge badge-success">Utilisateur</span>
                                         {% else %}
-                                        {{ comment.author }}
-                                        <span id="badge-anonyme" class="badge badge-secondary">Anonyme</span>
+                                            {{ comment.getAuthor() }}
+                                            <span id="badge-anonyme" class="badge badge-secondary">Anonyme</span>
                                         {% endif %}
                                     </h6>
                                     <span>
-                                        <small id="comment-publishedAt" class="float-left">le
-                                            {{ comment.createdAt|date("m/d/Y") }}</small>
+                                        <small id="comment-publishedAt" class="float-left">
+                                            {{ comment.getCreatedAt()|ago }}</small>
                                     </span>
                                 </span>
                             </div>
                             <div class="">
-                                {{ comment.content }}
+                                {{ comment.getContent() }}
                             </div>
                         </section>
                     </div>

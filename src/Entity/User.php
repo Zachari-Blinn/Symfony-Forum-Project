@@ -73,7 +73,7 @@ class User implements UserInterface
     private $isActive;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\HasReadTopic", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="App\Entity\HasReadTopic", mappedBy="user", fetch="EAGER")
      */
     private $hasReadTopics;
 

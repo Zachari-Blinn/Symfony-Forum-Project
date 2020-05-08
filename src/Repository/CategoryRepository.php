@@ -2,11 +2,12 @@
 
 namespace App\Repository;
 
+use App\Entity\Topic;
+use Doctrine\ORM\Query;
 use App\Entity\Category;
 use Doctrine\DBAL\Query\QueryBuilder;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Doctrine\ORM\Query;
 
 /**
  * @method Category|null find($id, $lockMode = null, $lockVersion = null)
@@ -56,15 +57,15 @@ class CategoryRepository extends ServiceEntityRepository
      * @param Topic $topic
      * @return integer
      */
-    public function findVuesByTopic($topic): int
+    public function findVuesByTopic(?Topic $topic): int
     {
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
             'SELECT COUNT(h)
              FROM App\Entity\Category c
-             JOIN c.topic t
-             JOIN t.hasReadTopics h
+             LEFT JOIN c.topic t
+             LEFT JOIN t.hasReadTopics h
              WHERE h.topic = :topic'
             )->setParameter('topic', $topic);
 
@@ -77,15 +78,15 @@ class CategoryRepository extends ServiceEntityRepository
      * @param Category $category
      * @return integer
      */
-    public function countAllMessages($category): int
+    public function countAllMessages(?Category $category): int
     {
         $entityManager = $this->getEntityManager();
 
         $query = $entityManager->createQuery(
             'SELECT COUNT(comments)
              FROM App\Entity\Category category
-             JOIN category.topic topic
-             JOIN topic.comments comments
+             LEFT JOIN category.topic topic
+             LEFT JOIN topic.comments comments
              WHERE category = :cat'
             )->setParameter('cat', $category);
 

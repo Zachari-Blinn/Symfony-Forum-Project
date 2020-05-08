@@ -15,15 +15,6 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/user", name="app_user")
-     */
-    public function index()
-    {
-        return $this->render('user/index.html.twig', [
-        ]);
-    }
-
-    /**
      * @Route("/user/profil/show/{slug}", name="app_user_profil_show")
      */
     public function showProfil(User $user)

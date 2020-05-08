@@ -33,13 +33,13 @@
                         class="fas fa-home"></i></i></a>
                 <span>
                     <a class="white" href="{{ path('app_default') }}">Accueil</a> <i class="fas fa-arrow-right"></i> <a
-                        class="white" href="{{ path('app_default') }}">{{ category.forum.title|raw }}</a> <i
+                        class="white" href="{{ path('app_default') }}">{{ category.getForum().getTitle()|raw }}</a> <i
                         class="fas fa-arrow-right"></i>
-                    <font class="font-weight-bold">{{category.title|raw}}</font>
+                    <font class="font-weight-bold">{{category.getTitle()|raw}}</font>
                     <span>
                         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                         <a id="btn-success" type="button" class="btn float-right"
-                            href="{{ path('app_topic_new', {'category': category.id}) }}"><i class="fas fa-feather-alt"></i> Sujet
+                            href="{{ path('app_topic_new', {'category': category.getId()}) }}"><i class="fas fa-feather-alt"></i> Sujet
                         </a>
                         {% else %}
                         <a id="btn-success" type="button" class="btn float-right"
@@ -53,19 +53,19 @@
                 <div id="card" class="container-fluid card shadow mb-3">
                     <div class="card-body">
                         <span class="float-left">
-                            <h3 class="card-title">{{category.title|raw}}</h3>
+                            <h3 class="card-title">{{category.getTitle()|raw}}</h3>
                         </span>
                         <span class="float-right">
                             <a id="btn-warning" type="button" class="btn btn-circle"
-                                href="{{ path('app_category_edit', {'forum': category.forum.id, 'category': category.id}) }}"><i
+                                href="{{ path('app_category_edit', {'forum': category.getForum().getId(), 'category': category.getId()}) }}"><i
                                     class="fas fa-wrench"></i>
                             </a>
                             <a id="btn-success" type="button" class="btn btn-circle"
-                                href="{{ path('app_topic_new', {'category': category.id}) }}"><i class="fas fa-plus"></i>
+                                href="{{ path('app_topic_new', {'category': category.getId()}) }}"><i class="fas fa-plus"></i>
                             </a>
                         </span>
-                        {% if category.description is defined and category.description is not null %}
-                            <p id="description" class="card-text">{{ category.description|raw }}</p>
+                        {% if category.getDescription() is defined and category.getDescription() is not null %}
+                            <p id="description" class="card-text">{{ category.getDescription()|raw }}</p>
                         {% endif %}
                     </div>
                     <div class="table-responsive">
@@ -78,19 +78,19 @@
                                             <th scope="row"><i id="bookmark" class="col-1 far fa-bookmark"></i>
                                             </th>
                                             <td class="col-6">
-                                                <a href="{{ path('app_topic_show', {'slug': topic.slug, 'page': 1}) }}">
+                                                <a href="{{ path('app_topic_show', {'slug': topic.getSlug(), 'page': 1}) }}">
                                                     <h6>{{ topic.title }}</h6>
                                                 </a>
                                                 </n>
-                                                {% if topic.content is defined and topic.content is not null %}
-                                                <p>{{ topic.content|striptags|u.truncate(50, '...')|raw }}</p>
+                                                {% if topic.getContent() is defined and topic.getContent() is not null %}
+                                                <p>{{ topic.getContent()|striptags|u.truncate(50, '...')|raw }}</p>
                                                 {% endif %}
                                             </td>
                                             <td class="col-1">
                                                 <p id="topic-message" class="text-center font-weight-bold">
-                                                    {{ topic.comments|length }}</p>
+                                                    {{ topic.getComments()|length }}</p>
                                                 </n>
-                                                {% if topic.comments|length <= 1 %}
+                                                {% if topic.getComments()|length <= 1 %}
                                                 <p class="text-center font-weight-light">message</p>
                                                 {% else %}
                                                 <p class="text-center font-weight-light">messages</p>

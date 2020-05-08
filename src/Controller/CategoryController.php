@@ -6,6 +6,7 @@ use App\Entity\Forum;
 use App\Entity\Topic;
 use App\Entity\Category;
 use App\Form\CategoryType;
+use App\Repository\TopicRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -19,11 +20,13 @@ class CategoryController extends AbstractController
     /**
      * @Route("/category/{slug}/{page}", name="app_category")
      */
-    public function index(Category $category, PaginatorInterface $paginator, Request $request, $page): Response
+    public function index(Category $category, TopicRepository $topicRepository, PaginatorInterface $paginator, Request $request, Int $page): Response
     {
-        $data = $this->getDoctrine()->getRepository(Topic::class)->findBy([
-            'category' => $category->getId(),
-        ]);
+        // $data = $topicRepository->findBy([
+        //     'category' => $category->getId(),
+        // ]);
+
+        $data = $topicRepository->findAllTopicByNewest($category);
 
         $topics = $paginator->paginate($data, $request->query->getInt('page', $page), 8);
 

@@ -31,7 +31,7 @@
             <span>
                 <div class="alert alert-danger" role="alert">
                     <i class="fas fa-bullhorn"></i>
-                    <span class="p-4">
+                    <span class="p-3">
                         Partie du 11 Mai - <a href="#">Inscrivez vous dès maintenant !</a>
                     </span>
             </span>
@@ -52,41 +52,41 @@
             <div id="card" class="container-fluid card shadow mb-3">
                 <div class="card-body">
                     <span class="float-left">
-                        <h3 class="card-title">{{forum.title|raw}}</h3>
+                        <h3 class="card-title">{{forum.getTitle()|raw}}</h3>
                     </span>
                     <span class="float-right">
                         <a id="btn-warning" type="button" class="btn btn-circle"
-                            href="{{ path('app_forum_edit', {'slug': forum.slug}) }}"><i class="fas fa-drafting-compass"></i></a>
+                            href="{{ path('app_forum_edit', {'slug': forum.getSlug()}) }}"><i class="fas fa-drafting-compass"></i></a>
                         <a id="btn-success" type="button" class="btn btn-circle"
-                            href="{{ path('app_category_new', {'forum': forum.id}) }}"><i class="fas fa-plus"></i></a>
+                            href="{{ path('app_category_new', {'forum': forum.getId()}) }}"><i class="fas fa-plus"></i></a>
                     </span>
-                    {% if forum.description is defined and forum.description is not null %}
-                    <p id="description" class="card-text">{{ forum.description|raw }}</p>
+                    {% if forum.getDescription() is defined and forum.getDescription() is not null %}
+                    <p id="description" class="card-text">{{ forum.getDescription()|raw }}</p>
                     {% endif %}
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover">
                         <tbody>
-                            {% for category in forum.category %}
+                            {% for category in forum.getCategory() %}
                             <tr>
                                 <div class="container">
                                     <div class="row">
                                         <th scope="row"><i id="bookmark" class="col-1 far fa-bookmark"></i></th>
                                         <td class="col-6">
-                                            <a href="{{ path('app_category', {'slug': category.slug, 'page': 1}) }}">
-                                                <h6>{{ category.title }}</h6>
+                                            <a href="{{ path('app_category', {'slug': category.getSlug(), 'page': 1}) }}">
+                                                <h6>{{ category.getTitle() }}</h6>
                                             </a>
                                             </n>
-                                            {% if category.description is defined and category.description is not null %}
-                                            <p>{{ category.description|striptags|u.truncate(50, '...')|raw }}</p>
+                                            {% if category.getDescription() is defined and category.getDescription() is not null %}
+                                            <p>{{ category.getDescription()|striptags|u.truncate(50, '...')|raw }}</p>
                                             {% endif %}
                                         </td>
                                         <td class="col-1">
                                             <p id="topic-message" class="text-center font-weight-bold">
-                                                {{ category.topic|length }}
+                                                {{ category.getTopic()|length }}
                                             </p>
                                             </n>
-                                            {% if category.topic|length <= 1 %}
+                                            {% if category.getTopic()|length <= 1 %}
                                                 <p class="text-center font-weight-light">sujet</p>
                                             {% else %}
                                                 <p class="text-center font-weight-light">sujets</p>
