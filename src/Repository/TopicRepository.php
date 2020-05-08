@@ -53,6 +53,7 @@ class TopicRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('topic')
             ->select('topic')
+            ->andWhere('topic.isActive = true')
             ->andWhere('topic.category = :category')
             ->setParameter('category', $category)
             ->orderBy('topic.createdAt', 'DESC')

@@ -8,6 +8,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Validator\Constraints\Length;
 
 class CommentType extends AbstractType
 {
@@ -21,6 +22,7 @@ class CommentType extends AbstractType
                 ->add('author', TextType::class, [
                     'label' => 'Pseudo',
                     'required' => true,
+                    'constraints' => new Length(['min' => 3, 'max' => 25]),
                 ]);
         }
         $builder

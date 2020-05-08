@@ -22,10 +22,6 @@ class CategoryController extends AbstractController
      */
     public function index(Category $category, TopicRepository $topicRepository, PaginatorInterface $paginator, Request $request, Int $page): Response
     {
-        // $data = $topicRepository->findBy([
-        //     'category' => $category->getId(),
-        // ]);
-
         $data = $topicRepository->findAllTopicByNewest($category);
 
         $topics = $paginator->paginate($data, $request->query->getInt('page', $page), 8);
@@ -46,7 +42,7 @@ class CategoryController extends AbstractController
     {
         $currentRoute = $request->attributes->get('_route');
 
-        if($currentRoute == "category_new") $category = null;
+        if($currentRoute == "app_category_new") $category = null;
 
         if(!$category) $category = new Category($forum);
 
@@ -63,9 +59,9 @@ class CategoryController extends AbstractController
             $entityManager->persist($category);
             $entityManager->flush();
 
-            $this->addFlash('success', 'Category créée avec succes !');
+            // $this->addFlash('success', 'Category créée avec succes !');
 
-            return $this->redirectToRoute('default');
+            return $this->redirectToRoute('app_default');
         }
 
         return $this->render('category/newOrEdit.html.twig', [
