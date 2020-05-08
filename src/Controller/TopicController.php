@@ -35,7 +35,7 @@ class TopicController extends AbstractController
 
         $data = $this->getDoctrine()->getRepository(Comment::class)->findBy(['topic' => $topic->getId()]);
         
-        $comments = $paginator->paginate($data, $request->query->getInt('page', $page), 18);
+        $comments = $paginator->paginate($data, $request->query->getInt('page', $page), 10);
 
         if($user != null)
         {

@@ -37,9 +37,15 @@
                         class="fas fa-arrow-right"></i>
                     <font class="font-weight-bold">{{category.title|raw}}</font>
                     <span>
+                        {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                         <a id="btn-success" type="button" class="btn float-right"
-                            href="{{ path('app_category_new', {'forum': category.forum.id}) }}"><i
-                                class="fas fa-feather-alt"></i> Categorie</a>
+                            href="{{ path('app_topic_new', {'category': category.id}) }}"><i class="fas fa-feather-alt"></i> Sujet
+                        </a>
+                        {% else %}
+                        <a id="btn-success" type="button" class="btn float-right"
+                            href="{{ path('app_login') }}"><i class="fas fa-sign-in-alt"></i> S'authentifier
+                        </a>
+                        {% endif %}
                     </span>
                 </span>
             </span>
@@ -106,12 +112,7 @@
                                     </div>
                                 </tr>
                                 {% else %}
-                                <div class="alert alert-success m-3" role="alert">
-                                     <i class="fas fa-coffee"></i></i>
-                                     <span class="p-4">
-                                        Soyez la première personne à écrire un sujet sur cette catégorie !
-                                    </span>
-                                </div>
+                                    {% block emptyCategory %}{% include "block/_emptyCategory.html.twig" %}{% endblock %}
                                 {% endfor %}
                             </tbody>
                         </table>

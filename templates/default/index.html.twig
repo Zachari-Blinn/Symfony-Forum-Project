@@ -118,12 +118,7 @@
                 </div>
             </div>
             {% else %}
-            <div class="alert alert-success m-3" role="alert">
-                <i class="fas fa-coffee"></i></i>
-                <span class="p-4">
-                   Soyez la première personne à ajouter un forum sur ce site !
-               </span>
-           </div>
+                {% block emptyForum %}{% include "block/emptyForum.html.twig" %}{% endblock %}
             {% endfor %}
         </div>
 
