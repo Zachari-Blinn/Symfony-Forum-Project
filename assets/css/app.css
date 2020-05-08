@@ -246,3 +246,14 @@ td {
 .pagination a.active {
 border-radius: 5px;
 }
+
+/* select{
+    color:red !important;
+    background-color: red !important;
+ 
+} */
+
+.custom-file-input{
+    background-color: #16161a;
+
+}

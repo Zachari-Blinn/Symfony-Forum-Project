@@ -33,7 +33,7 @@ class CountTopicViewsExtension extends AbstractExtension
 
     public function topicViewsFunction($topic)
     {
-        $topicViews = $this->em->getRepository(Topic::class)->findViewsByTopic($topic);
+        $topicViews = $this->em->getRepository(Topic::class)->countViewsByTopic($topic);
 
         return $topicViews;
     }

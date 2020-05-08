@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Entity\User;
+use App\Entity\Topic;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -31,9 +33,11 @@ class HasReadTopic
      */
     private $updatedAt;
 
-    public function __construct()
+    public function __construct(User $user, Topic $topic)
     {
         $this->setUpdatedAt(new \DateTime('now'));
+        $this->setUser($user);
+        $this->setTopic($topic);
     }
 
     public function getId(): ?int

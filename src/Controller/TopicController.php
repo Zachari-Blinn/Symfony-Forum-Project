@@ -23,7 +23,7 @@ class TopicController extends AbstractController
     /**
      * @Route("/topic/show/{slug}/{page}", name="app_topic_show", methods={"GET","POST"})
      */
-    public function show(Topic $topic, Comment $comment = null, HasReadTopicRepository $hasReadTopicRepository, TopicRepository $topicRepository, PaginatorInterface $paginator, Request $request, $page, EntityManagerInterface $entityManager): Response
+    public function show(Topic $topic, Comment $comment = null, HasReadTopicRepository $hasReadTopicRepository, PaginatorInterface $paginator, Request $request, $page, EntityManagerInterface $entityManager): Response
     {
         // $this->denyAccessUnlessGranted('VIEW', $topic);
 
@@ -32,8 +32,6 @@ class TopicController extends AbstractController
         $form = $this->createForm(CommentType::class, $comment);
         $user = $this->getUser();
         $isAuth = false;
-
-        $views = $topicRepository->findViewsByTopic($topic);
 
         $data = $this->getDoctrine()->getRepository(Comment::class)->findBy(['topic' => $topic->getId()]);
         
@@ -69,11 +67,10 @@ class TopicController extends AbstractController
 
             // $this->addFlash('success', 'Commentaire créée avec succes !');
 
-            return $this->redirectToRoute('app_topic_show', ['id' => $topic->getId(), 'page' => 1]);
+            return $this->redirectToRoute('app_topic_show', ['slug' => $topic->getSlug(), 'page' => 1]);
         }
 
         return $this->render('topic/show.html.twig', [
-            'views' => $views,
             'topic' => $topic,
             'comments' => $comments,
             'form' => $form->createView()

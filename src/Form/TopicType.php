@@ -26,11 +26,11 @@ class TopicType extends AbstractType
             ])
             ->add('isPinned', CheckboxType::class, [
                 'label' => 'Epingler le sujet',
-                'required' => true,
+                'required' => false,
             ])
             ->add('allowAnonymous', CheckboxType::class, [
                 'label' => 'Commentaires anonymes',
-                'required' => true,
+                'required' => false,
             ])
         ;
     }

@@ -44,7 +44,7 @@
             <!-- topic -->
             <article>
                 <div class="media">
-                    <img src="..." class="align-self-start mr-3" alt="...">
+                    <img src="https://eu.ui-avatars.com/api/?rounded=true&background={{ colour(topic.user.pseudo) }}&color=fff&name={{ topic.user.pseudo|first }}" class="align-self-start mr-3" alt="...">
                     <div id="card" class="container-fluid card shadow mb-3 p-3">
                         <div class="media-body">
                             <span>
@@ -73,8 +73,12 @@
             {% for comment in comments %}
             <article>
                 <div class="media">
-                    <img src="..." class="align-self-start mr-3" alt="...">
-                    <div id="card" class="card shadow mb-4 p-3">
+                    {% if comment.user is defined and comment.user is not null  %}
+                        <img src="https://eu.ui-avatars.com/api/?rounded=true&background={{ colour(topic.user.pseudo) }}&color=fff&name={{ comment.user.pseudo|first }}" class="align-self-start mr-3" alt="...">
+                    {% else %}
+                        <img src="https://eu.ui-avatars.com/api/?rounded=true&background={{ colour(comment.author) }}&color=fff&name={{ comment.author|first }}" class="align-self-start mr-3" alt="...">
+                    {% endif %}
+                        <div id="card" class="container-fluid card shadow mb-4 p-3">
                         <section id="repondre">
                             <div id="header-comment">
                                 <span>
@@ -103,7 +107,7 @@
             {% endfor %}
 
             <div class="media">
-                <img src="..." class="align-self-start mr-3" alt="...">
+                <!-- <img src="https://eu.ui-avatars.com/api/?rounded=true&background=a0a0a0&color=fff&name=Z" class="align-self-start mr-3" alt="..."> -->
                 <div id="card" class="container-fluid d-inline-flexcard shadow mb-3 p-3">
                     <section id="repondre">
                         {{ form_start(form) }}

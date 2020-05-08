@@ -55,7 +55,7 @@ class TopicRepository extends ServiceEntityRepository
      * @param [type] $topic
      * @return integer
      */
-    public function findViewsByTopic($topic): int
+    public function countViewsByTopic($topic): int
     {
         $entityManager = $this->getEntityManager();
 
