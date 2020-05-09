@@ -37,12 +37,6 @@ class PartyVoter extends Voter
         /** @var Party $party */
         $party = $subject;
 
-        // si les anonymous ne sont pas acceptés 
-        if (!$user instanceof User && $party->getAllowAnonymous() == false)
-        {
-            return false;
-        }
-
         // ROLE_SUPER_ADMIN can do anything! The power!
         if ($this->security->isGranted('ROLE_SUPER_ADMIN'))
         {
@@ -79,6 +73,12 @@ class PartyVoter extends Voter
 
         // si la party n'est plus active, si la date d'expiration est dépassé, si la date de la partie est dépassé
         if($party->getIsAtive() == false || new \DateTime('now') > $party->getExpireAt() || new \DateTime('now') > $party->getPartyAt())
+        {
+            return false;
+        }
+
+        // si les anonymous ne sont pas acceptés 
+        if (!$user instanceof User && $party->getAllowAnonymous() == false)
         {
             return false;
         }

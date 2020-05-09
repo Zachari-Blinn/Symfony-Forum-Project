@@ -1,10 +1,20 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
-    <h1>Page not found</h1>
+{% block title %}Page non trouvée{% endblock %}
 
-    <p>
-        The requested page couldn't be located. Checkout for any URL
-        misspelling or <a href="{{ path('app_default') }}">return to the homepage</a>.
-    </p>
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="card" class="card shadow mb-4 p-3">
+                <h3>Une erreur est survenue :(</h3>
+                <br>
+                <code>{{ status_code }} - {{ status_text }}</code>
+                <p>
+                    Pas d'inquiétude, ça arrive même au meilleur, pourquoi pas revenir en lieu sûr ? sur la page <a href="{{ path('app_default') }}">d'accueil</a>, par exemple.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}

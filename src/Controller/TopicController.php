@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\User;
 use App\Entity\Topic;
 use App\Entity\Comment;
 use App\Form\TopicType;
@@ -25,36 +26,19 @@ class TopicController extends AbstractController
      */
     public function show(Topic $topic, Comment $comment = null, HasReadTopicRepository $hasReadTopicRepository, PaginatorInterface $paginator, Request $request, $page, EntityManagerInterface $entityManager): Response
     {
-        // $this->denyAccessUnlessGranted('VIEW', $topic);
-
         $comment = new Comment($topic);
 
         $form = $this->createForm(CommentType::class, $comment);
         $user = $this->getUser();
         $isAuth = false;
 
+        if($user) return $isAuth = true;
+
         $data = $this->getDoctrine()->getRepository(Comment::class)->findBy(['topic' => $topic->getId()]);
         
         $comments = $paginator->paginate($data, $request->query->getInt('page', $page), 10);
 
-        if($user != null)
-        {
-            $isAuth = true;
-            $comment->setUser($user);
-            $hasReadTopic = $hasReadTopicRepository->findOneBy(['user' => $user->getId(), 'topic' => $topic->getId()]);
-
-            if($hasReadTopicRepository->findOneBy(['user' => $user->getId(), 'topic' => $topic->getId()]) == null)
-            {
-                $hasReadTopic = new HasReadTopic($user, $topic);
-            }
-            else
-            {
-                $hasReadTopic->setUpdatedAt(new \DateTime());
-            }
-
-            $entityManager->persist($hasReadTopic);
-            $entityManager->flush();
-        }
+        $this->hasRead($user, $comment, $hasReadTopicRepository, $topic, $entityManager);
 
         $form = $this->createForm(CommentType::class, $comment, ['isAuth' => $isAuth]);
 
@@ -75,6 +59,27 @@ class TopicController extends AbstractController
             'comments' => $comments,
             'form' => $form->createView()
         ]);
+    }
+
+    public function hasRead($user, $comment, $hasReadTopicRepository, $topic, $entityManager): void
+    {
+        if($user)
+        {
+            $comment->setUser($user);
+            $hasReadTopic = $hasReadTopicRepository->findOneBy(['user' => $user->getId(), 'topic' => $topic->getId()]);
+
+            if($hasReadTopicRepository->findOneBy(['user' => $user->getId(), 'topic' => $topic->getId()]) == null)
+            {
+                $hasReadTopic = new HasReadTopic($user, $topic);
+            }
+            else
+            {
+                $hasReadTopic->setUpdatedAt(new \DateTime());
+            }
+
+            $entityManager->persist($hasReadTopic);
+            $entityManager->flush();
+        }
     }
 
     /**
