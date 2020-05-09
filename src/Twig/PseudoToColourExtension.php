@@ -17,7 +17,7 @@ class PseudoToColourExtension extends AbstractExtension
     public function convertToHexa($str)
     {
         $value = bin2hex($str);
-        $colour = substr($value, 0, 3);
+        $colour = substr($value, 0, 4);
 
         return $colour;
     }

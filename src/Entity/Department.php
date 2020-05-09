@@ -30,7 +30,7 @@ class Department
     private $code;
 
     /**
-     * @ORM\OneToMany(targetEntity=City::class, mappedBy="departement")
+     * @ORM\OneToMany(targetEntity=City::class, mappedBy="department")
      */
     private $cities;
 
