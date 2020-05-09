@@ -21,6 +21,8 @@ class ForumController extends AbstractController
      */
     public function newOrEdit(Forum $forum = null, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         if(!$forum) $forum = new Forum();
         
         $form = $this->createForm(ForumType::class, $forum);
@@ -47,7 +49,7 @@ class ForumController extends AbstractController
     }
 
     /**
-     * @Route("/forum/delete/{slug}", name="forum_delete", methods={"DELETE"})  
+     * @Route("/forum/delete/{slug}", name="app_forum_delete", methods={"DELETE"})  
      */
     public function deleteParty(Forum $forum, EntityManagerInterface $entityManager, Request $request): Response
     {

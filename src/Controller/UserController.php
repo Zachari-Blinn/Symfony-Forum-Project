@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 class UserController extends AbstractController
 {
     /**
-     * @Route("/user/profil/show/{slug}", name="app_user_profil_show")
+     * @Route("/user/profil/show/{slug}", name="app_user_profil_show", methods={"GET"})
      */
     public function showProfil(User $user)
     {

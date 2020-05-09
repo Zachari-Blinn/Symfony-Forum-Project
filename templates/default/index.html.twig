@@ -58,7 +58,7 @@
                         <a id="btn-warning" type="button" class="btn btn-circle"
                             href="{{ path('app_forum_edit', {'slug': forum.getSlug()}) }}"><i class="fas fa-drafting-compass"></i></a>
                         <a id="btn-success" type="button" class="btn btn-circle"
-                            href="{{ path('app_category_new', {'forum': forum.getId()}) }}"><i class="fas fa-plus"></i></a>
+                            href="{{ path('app_category_new', {'slug': forum.getSlug()}) }}"><i class="fas fa-plus"></i></a>
                     </span>
                     {% if forum.getDescription() is defined and forum.getDescription() is not null %}
                     <p id="description" class="card-text">{{ forum.getDescription()|raw }}</p>

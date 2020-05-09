@@ -122,7 +122,7 @@ class TopicController extends AbstractController
     }
 
     /**
-     * @Route("/topic/delete/{id}", name="topic_delete", methods={"DELETE"})  
+     * @Route("/topic/delete/{id}", name="app_topic_delete", methods={"DELETE"})  
      */
     public function deleteTopic(Topic $topic, EntityManagerInterface $entityManager, Request $request): Response
     {
@@ -138,7 +138,7 @@ class TopicController extends AbstractController
     }
 
     /**
-     * @Route("/topic/{topic}/delete/{id}", name="topic_comment_delete", methods={"DELETE"})  
+     * @Route("/topic/{topic}/delete/{id}", name="app_topic_comment_delete", methods={"DELETE"})  
      */
     public function deleteComment(Comment $comment, EntityManagerInterface $entityManager, Request $request): Response
     {

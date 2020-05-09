@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 use App\Entity\Forum;
-use App\Entity\Topic;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\TopicRepository;
@@ -14,13 +13,14 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\ParamConverter;
 
 class CategoryController extends AbstractController
 {
     /**
-     * @Route("/category/{slug}/{page}", name="app_category")
+     * @Route("/category/{slug}/{page}", name="app_category", requirements={"page"="\d+"}, methods={"GET"})
      */
-    public function index(Category $category, TopicRepository $topicRepository, PaginatorInterface $paginator, Request $request, Int $page): Response
+    public function index(Category $category, TopicRepository $topicRepository, PaginatorInterface $paginator, Request $request, Int $page = 1): Response
     {
         $data = $topicRepository->findAllTopicByNewest($category);
 
@@ -33,18 +33,23 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * New or edit category entity
+     * @ParamConverter("slug", options={"mapping": {"forum_slug": "slug"}})
+     * @ParamConverter("category", options={"mapping": {"category_slug": "slug"}})
      * 
-     * @Route("/category/new/{forum}", name="app_category_new", methods={"GET","POST"})
+     * @Route("/category/new/{slug}", name="app_category_new", methods={"GET","POST"})
      * @Route("/category/edit/{forum}/{category}", name="app_category_edit", methods={"GET","POST"})
      */
-    public function newOrEdit(Forum $forum, Category $category = null, Request $request, EntityManagerInterface $entityManager): Response
+    public function newOrEdit(Forum $forum, ?Category $category, Request $request, EntityManagerInterface $entityManager): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_EDIT_CATEGORY', $category);
+
         $currentRoute = $request->attributes->get('_route');
 
-        if($currentRoute == "app_category_new") $category = null;
-
-        if(!$category) $category = new Category($forum);
+        if($currentRoute == "app_category_new")
+        {
+            $category = null;
+            $category = new Category($forum);
+        }
 
         $form = $this->createForm(CategoryType::class, $category);
 
@@ -70,7 +75,7 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/category/delete/{slug}", name="category_delete", methods={"DELETE"})  
+     * @Route("/category/delete/{slug}", name="app_category_delete", methods={"DELETE"})  
      */
     public function deleteParty(Category $category, EntityManagerInterface $entityManager, Request $request): Response
     {
@@ -84,5 +89,4 @@ class CategoryController extends AbstractController
 
         return $this->redirectToRoute('app_default');
     }
-
 }

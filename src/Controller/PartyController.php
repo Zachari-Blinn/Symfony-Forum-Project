@@ -18,7 +18,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class PartyController extends AbstractController
 {
     /**
-     * @Route("/party", name="app_party")
+     * @Route("/party", name="app_party", methods={"GET"})
      */
     public function index(PartyRepository $partyRepository)
     {
@@ -108,7 +108,7 @@ class PartyController extends AbstractController
     }
 
     /**
-     * @Route("/party/delete/{slug}", name="party_delete", methods={"DELETE"})  
+     * @Route("/party/delete/{slug}", name="app_party_delete", methods={"DELETE"})  
      */
     public function deleteParty(Party $party, EntityManagerInterface $entityManager, Request $request): Response
     {
