@@ -33,7 +33,7 @@ class PartyController extends AbstractController
      */
     public function newOrEdit(Party $party = null, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $this->denyAccessUnlessGranted('edit', $party);
+        // $this->denyAccessUnlessGranted('edit', $party);
 
         if(!$party) $party = new Party();
 
@@ -69,32 +69,32 @@ class PartyController extends AbstractController
     /**
      * New or edit participate at party
      * 
-     * @Route("/party/participate/new/{party}", name="app_party_participate", methods={"GET","POST"})
-     * @Route("/party/participate/edit/{party}", name="app_party_participate", methods={"GET","POST"})
+     * @Route("/party/participate/new/{party}", name="app_party_new_participate", methods={"GET","POST"})
+     * @Route("/party/participate/edit/{party}", name="app_party_edit_participate", methods={"GET","POST"})
      */
     public function participate(Party $party, ParticipateRepository $participateRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
-        $this->denyAccessUnlessGranted('PARTICIPATE', $party);
+        // $this->denyAccessUnlessGranted('PARTICIPATE', $party);
 
         $currentUser = $this->getUser();
-        $auth = false;
+        $isAuth = false;
         $participate = null;
 
         if($currentUser)
         {
-            $auth = true;
+            $isAuth = true;
             $participate = $participateRepository->findOneBy(['party' => $party->getId(), 'user' => $currentUser->getId()]);
         }
         
         if(!$participate) $participate = new Participate($party, $currentUser);
         
-        $form = $this->createForm(ParticipateType::class, $participate, ['auth' => $auth]);
+        $form = $this->createForm(ParticipateType::class, $participate, ['isAuth' => $isAuth]);
 
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $this->denyAccessUnlessGranted('PARTICIPATE', $party);
+            // $this->denyAccessUnlessGranted('PARTICIPATE', $party);
 
             $entityManager->persist($participate);
             $entityManager->flush();

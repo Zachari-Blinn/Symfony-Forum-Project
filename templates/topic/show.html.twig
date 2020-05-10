@@ -30,7 +30,7 @@
                         class="white" href="{{ path('app_default') }}">{{ topic.getCategory().getForum().getTitle()|raw }}</a> <i
                         class="fas fa-arrow-right"></i> <a class="white"
                         href="{{ path('app_category', {'slug': topic.getCategory().getSlug(), 'page': 1}) }}">{{ topic.getCategory().getTitle()|raw }}</a>
-                    <i class="fas fa-arrow-right"></i>
+                    <i class="fas fa-arrow-right profile-img rounded-circle"></i>
                     <font class="font-weight-bold">{{ topic.getTitle() }}</font>
                     <span>
                         <a id="btn-success" type="button" class="btn float-right" href="#repondre"><i

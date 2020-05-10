@@ -83,5 +83,4 @@ class PartyVoter extends Voter
             return false;
         }
     }
-
 }

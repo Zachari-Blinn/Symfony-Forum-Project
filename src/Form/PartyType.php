@@ -4,13 +4,14 @@ namespace App\Form;
 
 use App\Entity\Party;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class PartyType extends AbstractType
@@ -42,41 +43,33 @@ class PartyType extends AbstractType
                 'label' => "Prix de la caution",
                 'required' => false,
                 'data' => 50,
-                'currency' => 'EUR',
+                // 'currency' => 'EUR',
             ])
             ->add('locationPrice', MoneyType::class, [
                 'label' => "Prix de la location",
                 'required' => false,
                 'data' => 0,
-                'currency' => 'EUR',
+                // 'currency' => 'EUR',
             ])
             ->add('freelancePrice', MoneyType::class, [
                 'label' => "Prix participation freelance",
                 'required' => false,
                 'data' => 0,
-                'currency' => 'EUR',
+                // 'currency' => 'EUR',
             ])
             ->add('numberLocation', NumberType::class, [
                 'label' => "Nombre de location disponible",
                 'required' => false,
                 'data' => 0,
-                'currency' => 'EUR',
+                // 'currency' => 'EUR',
             ])
-            ->add('allowAnonymous', ChoiceType::class, [
-                'choices' => [
-                    'Oui' => true,
-                    'Non' => false,
-                ],
+            ->add('allowAnonymous', CheckboxType::class, [
                 'label' => "Accepter les utilisateurs anonymes",
                 'required' => false,
             ])
-            ->add('isAtive', ChoiceType::class, [
-                'choices' => [
-                    'Oui' => true,
-                    'Non' => false,
-                ],
+            ->add('isAtive', CheckboxType::class, [
                 'label' => 'Annonce visible',
-                'required' => true,
+                'required' => false,
             ])
         ;
     }

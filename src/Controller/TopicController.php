@@ -32,7 +32,7 @@ class TopicController extends AbstractController
         $user = $this->getUser();
         $isAuth = false;
 
-        if($user) return $isAuth = true;
+        if($user) $isAuth = true;
 
         $data = $this->getDoctrine()->getRepository(Comment::class)->findBy(['topic' => $topic->getId()]);
         

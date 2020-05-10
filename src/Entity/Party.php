@@ -71,7 +71,7 @@ class Party
     /**
      * @ORM\Column(type="float", nullable=true)
      */
-    private $locationLprice;
+    private $locationPrice;
 
     /**
      * @ORM\Column(type="float", nullable=true)
@@ -238,14 +238,14 @@ class Party
         return $this;
     }
 
-    public function getLocationLprice(): ?float
+    public function getLocationPrice(): ?float
     {
-        return $this->locationLprice;
+        return $this->locationPrice;
     }
 
-    public function setLocationLprice(?float $locationLprice): self
+    public function setLocationPrice(?float $locationPrice): self
     {
-        $this->locationLprice = $locationLprice;
+        $this->locationPrice = $locationPrice;
 
         return $this;
     }

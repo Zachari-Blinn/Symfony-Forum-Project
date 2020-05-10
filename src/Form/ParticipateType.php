@@ -15,7 +15,9 @@ class ParticipateType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if($options['isAuth'] = false)
+        $isAuth = $options['isAuth'];
+
+        if($isAuth == false)
         {
             $builder
                 ->add('author', TextType::class, [
