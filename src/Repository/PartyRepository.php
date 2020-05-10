@@ -19,32 +19,22 @@ class PartyRepository extends ServiceEntityRepository
         parent::__construct($registry, Party::class);
     }
 
-    // /**
-    //  * @return Party[] Returns an array of Party objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Find all next party no expirated 
+     *
+     * @return Party|null
+     */ 
+    public function findAllNextParty(): ?array
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('party')
+            ->select('party')
+            ->andWhere('party.expireAt > :date_now')
+            ->setParameter('date_now', new \DateTime())
+            ->orderBy('party.partyAt', 'DESC')
+            ->setMaxResults(5)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Party
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

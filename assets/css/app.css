@@ -98,25 +98,33 @@ p {
     color: white;
 }
 
+.alert {
+    margin-bottom: 0px;
+    padding-bottom: 15px;
+    padding-top: 15px;
+    border-radius: 0;
+    border: none;
+}   
+
 /* alert danger */
 .alert-danger {
     background-color: #c44b3b;
+    border: #c44b3b !important;
     color: #ffffff;
-    border: none;
 }
 
 /* alert success */
 .alert-success {
     background-color: #01423a;
+    border: #01423a!important;
     color: #ffffff;
-    border: none;
 }
 
 /* alert info */
 .alert-info {
     background-color: #3da9fc;
+    border: #3da9fc !important;
     color: #ffffff;
-    border: none;
 }
 
 /* icon */
@@ -274,3 +282,24 @@ border-radius: 5px;
 img{
     pointer-events: none;
 }
+
+#topic-title {
+    margin-top: 35px;
+}
+
+.media-head > span:nth-child(1) > h6:nth-child(1) {
+    margin-bottom: 0px;
+}
+   
+.post-comment {
+    margin-left: 75px;
+}
+
+.topic-btn-back {
+    margin-left: 75px;
+}
+/* change moi ça */
+   
+   
+
+   

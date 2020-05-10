@@ -23,11 +23,12 @@
         <div class="col-md-12">
 
             <span>
-                <a id="btn-back" type="button" class="btn btn-circle" href="{{ path('app_default') }}"><i
-                        class="fas fa-home"></i></i></a>
+                <a id="btn-back" type="button" class="btn btn-circle topic-btn-back" href="{{ path('app_default') }}"><i
+                        class="fas fa-home"></i></a>
                 <span>
                     <a class="white" href="{{ path('app_default') }}">Accueil</a> <i class="fas fa-arrow-right"></i> <a
-                        class="white" href="{{ path('app_default') }}">{{ topic.getCategory().getForum().getTitle()|raw }}</a> <i
+                        class="white"
+                        href="{{ path('app_default') }}">{{ topic.getCategory().getForum().getTitle()|raw }}</a> <i
                         class="fas fa-arrow-right"></i> <a class="white"
                         href="{{ path('app_category', {'slug': topic.getCategory().getSlug(), 'page': 1}) }}">{{ topic.getCategory().getTitle()|raw }}</a>
                     <i class="fas fa-arrow-right profile-img rounded-circle"></i>
@@ -41,21 +42,26 @@
 
             <br><br>
 
-            <!-- topic -->
+            <!-- sujet -->
             <article>
                 <div class="media">
                     <img src="https://eu.ui-avatars.com/api/?rounded=true&background={{ colour(topic.getUser().getPseudo()) }}&color=fff&name={{ topic.getUser().getPseudo()|first }}"
                         class="align-self-start mr-3" alt="...">
                     <div id="card" class="container-fluid card shadow mb-3 p-3">
-                        <div class="media-body">
+                        <div class="media-head">
                             <span>
-                                <h3 id="topic-title" class="float-left">{{ topic.getTitle()|raw }}</h3>
+                                <h6 id="comment-title" class="float-left">
+                                    {{ topic.getUser().getPseudo() }}
+                                    <span id="badge-anonyme" class="badge badge-success">Utilisateur</span>
+                                </h6>
                                 <span>
-                                    <small id="topic-publishedAt" class="float-left">
+                                    <small id="comment-publishedAt" class="float-left">
                                         {{ topic.getCreatedAt()|ago }}</small>
                                 </span>
                             </span>
-                            <br><br>
+                        </div>
+                        <div class="media-body">
+                            <h3 id="topic-title">{{ topic.getTitle()|raw }}</h3>
                             <section>{{ topic.getContent()|raw }}</section>
                         </div>
                         <span>
@@ -71,6 +77,7 @@
 
             <br>
 
+            <!-- commentaires -->
             {% for comment in comments %}
             <article>
                 <div class="media">
@@ -87,11 +94,11 @@
                                 <span>
                                     <h6 id="comment-title" class="float-left">
                                         {% if comment.getUser() is defined and comment.getUser() is not null  %}
-                                            {{ comment.getUser().getPseudo() }}
-                                            <span id="badge-anonyme" class="badge badge-success">Utilisateur</span>
+                                        {{ comment.getUser().getPseudo() }}
+                                        <span id="badge-anonyme" class="badge badge-success">Utilisateur</span>
                                         {% else %}
-                                            {{ comment.getAuthor() }}
-                                            <span id="badge-anonyme" class="badge badge-secondary">Anonyme</span>
+                                        {{ comment.getAuthor() }}
+                                        <span id="badge-anonyme" class="badge badge-secondary">Anonyme</span>
                                         {% endif %}
                                     </h6>
                                     <span>
@@ -111,7 +118,7 @@
 
             <div class="media">
                 <!-- <img src="https://eu.ui-avatars.com/api/?rounded=true&background=a0a0a0&color=fff&name=Z" class="align-self-start mr-3" alt="..."> -->
-                <div id="card" class="container-fluid d-inline-flexcard shadow mb-3 p-3">
+                <div id="card" class="container-fluid d-inline-flexcard shadow mb-3 p-3 post-comment">
                     <section id="repondre">
                         {{ form_start(form) }}
                         {{ form_errors(form) }}
