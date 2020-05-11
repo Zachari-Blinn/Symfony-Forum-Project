@@ -3,8 +3,9 @@
 
 /* body */
 html, body {
-    background-color: #16161a;
-    font-family: Arial;
+    background-image: linear-gradient(to right top, #111821, #13171f, #14171e, #15161c, #16161a);
+    /* #16161A */
+    font-family: Arial, Helvetica, sans-serif;
     color: white;
 }
 
@@ -12,6 +13,7 @@ html, body {
     background: #01423a;
     height: 40px;
     width:100%;
+    margin-bottom: 100px;
 }
 
 .fixNavigation{
@@ -118,6 +120,7 @@ p {
     background-color: #01423a;
     border: #01423a!important;
     color: #ffffff;
+    border-radius: 10px;
 }
 
 /* alert info */
@@ -167,6 +170,7 @@ a:hover {
 #jumbotron-header {
     height: 200px;
     margin: 0;
+    background-color: #16161A;
 }
 
 a {
@@ -217,11 +221,6 @@ td {
 
 .table {
     margin-top: 15px;
-}
-
-#navigation {
-    margin-top: 0px;
-    margin-bottom: 50px;
 }
    
 #description {
@@ -300,6 +299,22 @@ img{
 }
 /* change moi ça */
    
-   
-
-   
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #16161A;
+  }
+  
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #242629;
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }

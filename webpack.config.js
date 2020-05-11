@@ -70,6 +70,11 @@ Encore
     // uncomment if you use API Platform Admin (composer req api-admin)
     // .enableReactPreset()
     //.addEntry('admin', './assets/js/admin.js')
+
+    .configureUrlLoader({
+        fonts: { limit: 4096 },
+        images: { limit: 4096 }
+    })
 ;
 
 module.exports = Encore.getWebpackConfig();

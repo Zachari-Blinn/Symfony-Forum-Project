@@ -1,17 +1,24 @@
 <nav id="navigation">
     <div class="container">
         <ul class="nav justify-content-center">
-            <li class="nav-item {{ app.request.get('_route') in 'default' ? 'active' }}">
-                <a class="nav-link active text-white" href="{{ path('app_default') }}">Accueil</a>
+            <li class="nav-item {{ app.request.get('_route') in 'app_default' ? 'active' }}">
+                <a class="nav-link text-grey" href="{{ path('app_default') }}">Accueil</a>
             </li>
             {# <li class="nav-item {{ app.request.get('_route') == 'app_user_profil_show' ? 'active' : '' }}">
                 <a class="nav-link text-white" href="{{ path('user_profil_show') }}">Profil</a>
             </li> #}
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">Messagerie</a>
+                <a class="nav-link text-grey" href="#">Partie</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="#">Deconnexion</a>
+                <a class="nav-link text-grey" href="#">Messagerie</a>
+            </li>
+            <li class="nav-item {{ app.request.get('_route') in 'app_login' ? 'active' }}">
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <a class="nav-link text-grey" href="{{ path('app_logout') }}">Deconnexion</a>
+                {% else %}
+                    <a class="nav-link text-grey" href="{{ path('app_login') }}">Connexion</a>
+                {% endif %}
             </li>
         </ul>
     </div>

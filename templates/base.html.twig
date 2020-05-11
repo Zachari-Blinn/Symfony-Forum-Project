@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}{% endblock %} | Forum</title>
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
-            <link rel="shortcut icon" href="#" />
         {% endblock %}
+        <meta name="description" content="Free Web tutorials">
+        <meta name="keywords" content="HTML, CSS, JavaScript">
+        <meta name="robots" content="noindex" />
+        <meta name="author" content="John Doe">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
         {# Party flash #}
         {% block partyMessage %}{% include "block/_partyMessage.html.twig" %}{% endblock %}
 
-        {# Header #}
-        {% block header %}{% include "block/_header.html.twig" %}{% endblock %}
+
 
         {# Barre de navigation #}
         {% block nav %}{% include "block/_navbar.html.twig" %}{% endblock %}  
