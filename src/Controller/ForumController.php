@@ -51,12 +51,14 @@ class ForumController extends AbstractController
     /**
      * @Route("/forum/delete/{slug}", name="app_forum_delete", methods={"DELETE"})  
      */
-    public function deleteParty(Forum $forum, EntityManagerInterface $entityManager, Request $request): Response
+    public function deleteForum(Forum $forum, EntityManagerInterface $entityManager, Request $request): Response
     {
         $this->denyAccessUnlessGranted('delete', $forum);
 
         if ($this->isCsrfTokenValid('delete'.$forum->getId(), $request->request->get('_token')))
         {
+            $forum->getCategory()->clear();
+
             $entityManager->remove($forum);
             $entityManager->flush();
         }

@@ -5,7 +5,9 @@ namespace App\Controller;
 use App\Entity\Forum;
 use App\Entity\Category;
 use App\Form\CategoryType;
+use App\Repository\CategoryRepository;
 use App\Repository\TopicRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,7 +22,7 @@ class CategoryController extends AbstractController
     /**
      * @Route("/category/{slug}/{page}", name="app_category", requirements={"page"="\d+"}, methods={"GET"})
      */
-    public function index(Category $category, TopicRepository $topicRepository, PaginatorInterface $paginator, Request $request, Int $page = 1): Response
+    public function index(Category $category, TopicRepository $topicRepository, PaginatorInterface $paginator, Request $request, Int $page = 1, CategoryRepository $categoryRepository, UserRepository $userRepository): Response
     {
         $data = $topicRepository->findAllTopicByNewest($category);
 
@@ -77,12 +79,14 @@ class CategoryController extends AbstractController
     /**
      * @Route("/category/delete/{slug}", name="app_category_delete", methods={"DELETE"})  
      */
-    public function deleteParty(Category $category, EntityManagerInterface $entityManager, Request $request): Response
+    public function deleteCategory(Category $category, EntityManagerInterface $entityManager, Request $request): Response
     {
         $this->denyAccessUnlessGranted('delete', $category);
 
         if ($this->isCsrfTokenValid('delete'.$category->getId(), $request->request->get('_token')))
         {
+            $category->getTopic()->clear();
+
             $entityManager->remove($category);
             $entityManager->flush();
         }

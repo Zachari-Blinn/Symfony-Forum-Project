@@ -2,10 +2,11 @@
 
 namespace App\Repository;
 
-use App\Entity\Category;
+use App\Entity\User;
 use App\Entity\Topic;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use App\Entity\Category;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @method Topic|null find($id, $lockMode = null, $lockVersion = null)

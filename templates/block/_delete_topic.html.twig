@@ -1,0 +1,9 @@
+
+<form action="{{ url('app_topic_delete', {slug: topic.slug}) }}" method="post" data-confirmation="true" id="delete-form">
+    <input type="hidden" name="token" value="{{ csrf_token('delete') }}" />
+    <button id="btn-danger" type="submit" class="btn btn-circle float-right">
+        <i class="fas fa-trash-alt"></i>
+    </button>
+</form>
+
+{# <a id="btn-danger" type="button" class="btn btn-circle float-right" href="#"><i class="fas fa-trash-alt"></i></a> #}

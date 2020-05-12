@@ -39,11 +39,11 @@
                     <span>
                         {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                         <a id="btn-success" type="button" class="btn float-right"
-                            href="{{ path('app_topic_new', {'category': category.getId()}) }}"><i class="fas fa-feather-alt"></i> Sujet
+                            href="{{ path('app_topic_new', {'category': category.getId()}) }}"><i
+                                class="fas fa-feather-alt"></i> Sujet
                         </a>
                         {% else %}
-                        <a id="btn-success" type="button" class="btn float-right"
-                            href="{{ path('app_login') }}"><i class="fas fa-sign-in-alt"></i> S'authentifier
+                        <a id="btn-success" type="button" class="btn float-right" href="{{ path('app_login') }}"><i class="fas fa-sign-in-alt"></i> S'authentifier
                         </a>
                         {% endif %}
                     </span>
@@ -61,11 +61,12 @@
                                     class="fas fa-wrench"></i>
                             </a>
                             <a id="btn-success" type="button" class="btn btn-circle"
-                                href="{{ path('app_topic_new', {'category': category.getId()}) }}"><i class="fas fa-plus"></i>
+                                href="{{ path('app_topic_new', {'category': category.getId()}) }}"><i
+                                    class="fas fa-plus"></i>
                             </a>
                         </span>
                         {% if category.getDescription() is defined and category.getDescription() is not null %}
-                            <p id="description" class="card-text">{{ category.getDescription()|raw }}</p>
+                        <p id="description" class="card-text">{{ category.getDescription()|raw }}</p>
                         {% endif %}
                     </div>
                     <div class="table-responsive">
@@ -78,7 +79,8 @@
                                             <th scope="row"><i id="bookmark" class="col-1 far fa-bookmark"></i>
                                             </th>
                                             <td class="col-6">
-                                                <a href="{{ path('app_topic_show', {'slug': topic.getSlug(), 'page': 1}) }}">
+                                                <a
+                                                    href="{{ path('app_topic_show', {'slug': topic.getSlug(), 'page': 1}) }}">
                                                     <h6>{{ topic.title }}</h6>
                                                 </a>
                                                 </n>
@@ -97,7 +99,8 @@
                                                 {% endif %}
                                             </td>
                                             <td class="col-1">
-                                                <p id="topic-message" class="text-center font-weight-bold">{{ views(topic) }}</p>
+                                                <p id="topic-message" class="text-center font-weight-bold">
+                                                    {{ views(topic) }}</p>
                                                 </n>
                                                 {% if topic.comments|length <= 1 %}
                                                 <p class="text-center font-weight-light">vue</p>
@@ -105,14 +108,14 @@
                                                 <p class="text-center font-weight-light">vues</p>
                                                 {% endif %}
                                             </td>
-                                            <td class="col-3">
+                                            <td class="col-4">
                                                 <!-- TODO -->
                                             </td>
                                         </div>
                                     </div>
                                 </tr>
                                 {% else %}
-                                    {% block emptyCategory %}{% include "block/_emptyCategory.html.twig" %}{% endblock %}
+                                {% block emptyCategory %}{% include "block/_emptyCategory.html.twig" %}{% endblock %}
                                 {% endfor %}
                             </tbody>
                         </table>

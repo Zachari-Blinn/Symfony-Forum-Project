@@ -65,15 +65,39 @@
                             <section>{{ topic.getContent()|raw }}</section>
                         </div>
                         <span>
-                            <a id="btn-danger" type="button" class="btn btn-circle float-right" href="#"><i
-                                    class="fas fa-trash-alt"></i></a>
-                            <a id="btn-warning" type="button" class="btn btn-circle float-right"
-                                href="{{ path('app_topic_edit', {'topic': topic.getId()}) }}"><i
-                                    class="fas fa-wrench"></i></a>
+                            {{ include('block/_delete_topic.html.twig', {topic: topic}, with_context = false) }}
+                            <a id="btn-warning" type="button" class="btn btn-circle float-right" href="{{ path('app_topic_edit', {'topic': topic.getId()}) }}"><i class="fas fa-wrench"></i></a>
                         </span>
                     </div>
                 </div>
             </article>
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10">
+                    </div>
+                    <div class="col-md-1">
+                        <p id="topic-message" class="text-center font-weight-bold">
+                            {{ topic.getComments()|length }}</p>
+                        </n>
+                        {% if topic.getComments()|length <= 1 %}
+                        <p class="text-center font-weight-light">message</p>
+                        {% else %}
+                        <p class="text-center font-weight-light">messages</p>
+                        {% endif %}
+                    </div>
+                    <div class="col-md-1">
+                        <p id="topic-message" class="text-center font-weight-bold">{{ views(topic) }}</p>
+                        </n>
+                        {% if views(topic) <= 1 %}
+                        <p class="text-center font-weight-light">vue</p>
+                        {% else %}
+                        <p class="text-center font-weight-light">vues</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
 
             <br>
 

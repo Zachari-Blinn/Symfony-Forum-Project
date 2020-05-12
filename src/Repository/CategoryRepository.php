@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Entity\User;
 use App\Entity\Topic;
 use Doctrine\ORM\Query;
 use App\Entity\Category;
@@ -92,4 +93,5 @@ class CategoryRepository extends ServiceEntityRepository
 
         return $query->getSingleScalarResult();
     }
+
 }

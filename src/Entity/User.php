@@ -120,6 +120,8 @@ class User implements UserInterface
         $this->conversationUsers = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->parties = new ArrayCollection();
+        $this->setIsActive(true);
+        $this->setCreatedAt(new \DateTime('now'));
     }
 
     public function getId(): ?int

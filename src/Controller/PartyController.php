@@ -116,6 +116,8 @@ class PartyController extends AbstractController
 
         if ($this->isCsrfTokenValid('delete'.$party->getId(), $request->request->get('_token')))
         {
+            $party->getParticipate()->clear();
+
             $entityManager->remove($party);
             $entityManager->flush();
         }

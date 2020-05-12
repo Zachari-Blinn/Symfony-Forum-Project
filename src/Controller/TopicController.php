@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class TopicController extends AbstractController
@@ -35,7 +36,7 @@ class TopicController extends AbstractController
         if($user) $isAuth = true;
 
         $data = $this->getDoctrine()->getRepository(Comment::class)->findBy(['topic' => $topic->getId()]);
-        
+
         $comments = $paginator->paginate($data, $request->query->getInt('page', $page), 10);
 
         $this->hasRead($user, $comment, $hasReadTopicRepository, $topic, $entityManager);
@@ -61,6 +62,9 @@ class TopicController extends AbstractController
         ]);
     }
 
+    /**
+     *Initiate view by user to topic
+     */
     public function hasRead($user, $comment, $hasReadTopicRepository, $topic, $entityManager): void
     {
         if($user)
@@ -84,7 +88,7 @@ class TopicController extends AbstractController
 
     /**
      * New or edit topic entity
-     * 
+     *
      * @Route("/topic/new/{category}", name="app_topic_new", methods={"GET","POST"})
      * @Route("/topic/edit/{topic}", name="app_topic_edit", methods={"GET","POST"})
      */
@@ -102,7 +106,7 @@ class TopicController extends AbstractController
         {
             $this->denyAccessUnlessGranted('edit', $topic);
         }
-        
+
         $form = $this->createForm(TopicType::class, $topic);
 
         $form->handleRequest($request);
@@ -127,23 +131,27 @@ class TopicController extends AbstractController
     }
 
     /**
-     * @Route("/topic/delete/{id}", name="app_topic_delete", methods={"DELETE"})  
+     * @Route("/topic/delete/{slug}", name="app_topic_delete", methods="POST")
+     * @IsGranted("delete", subject="topic")
      */
     public function deleteTopic(Topic $topic, EntityManagerInterface $entityManager, Request $request): Response
     {
-        $this->denyAccessUnlessGranted('delete', $topic);
-
         if ($this->isCsrfTokenValid('delete'.$topic->getId(), $request->request->get('_token')))
         {
+            $topic->getComments()->clear();
+            $topic->getHasReadTopics()->clear();
+
             $entityManager->remove($topic);
             $entityManager->flush();
+
+            // $this->addFlash('success', 'post.deleted_successfully');
         }
 
         return $this->redirectToRoute('app_default');
     }
 
     /**
-     * @Route("/topic/{topic}/delete/{id}", name="app_topic_comment_delete", methods={"DELETE"})  
+     * @Route("/topic/{topic}/delete/{id}", name="app_topic_comment_delete", methods={"DELETE"})
      */
     public function deleteComment(Comment $comment, EntityManagerInterface $entityManager, Request $request): Response
     {
@@ -153,6 +161,8 @@ class TopicController extends AbstractController
         {
             $entityManager->remove($comment);
             $entityManager->flush();
+
+            // $this->addFlash('success', 'post.deleted_successfully');
         }
 
         return $this->redirectToRoute('app_default');
