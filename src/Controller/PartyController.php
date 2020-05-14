@@ -22,8 +22,10 @@ class PartyController extends AbstractController
      */
     public function index(PartyRepository $partyRepository)
     {
+        // PAGINATATION TODO
+
         return $this->render('party/index.html.twig', [
-            'party' => $partyRepository,
+            'party' => $partyRepository->findAll(),
         ]);
     }
 

@@ -1,19 +1,31 @@
 {% for party in parties() %}
-    <span>
-        <div class="alert alert-danger" role="alert">
-            <i class="fas fa-bullhorn"></i>
-            <span class="p-3">
-                {{ party.title }} - <a href="#">Inscrivez vous dès maintenant !</a>
-            </span>
+<span>
+    <div id="party_flash" class="alert alert-danger" role="alert">
+        <div class="container">
+            <div class="row">
+                <div id="icon_party_flash" class="col-md-1">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <div id="text_party_flash" class="col-md-11">
+                    {{ party.title }} - <a href="#">Inscrivez vous dès maintenant !</a>
+                </div>
+            </div>
         </div>
-    </span>
+    </div>
+</span>
 {% else %}
-    <span>
-        <div class="alert alert-success" role="alert">
-            <i class="fas fa-bullhorn"></i>
-            <span class="p-3">
-                Aucune partie pour le moment, nous reviendrons bientot !
-            </span>
+<span>
+    <div id="party_flash" class="alert alert-success" role="alert">
+        <div class="container">
+            <div class="row">
+                <div id="icon_party_flash" class="col-md-1">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <div id="text_party_flash" class="col-md-11">
+                    Aucune partie pour le moment, nous reviendrons très bientôt !
+                </div>
+            </div>
         </div>
-    </span>
+    </div>
+</span>
 {% endfor %}

@@ -330,5 +330,30 @@ div.col-md-1:nth-child(2) {
 #comment_content {
     height: 137px;
 }
-   
 
+#party_flash {
+    margin-bottom: 17px;
+}
+   
+#icon_party_flash {
+    padding-left: 0px;
+    margin-top: 11px;
+}
+
+#text_party_flash {
+    padding-left: 0px;
+}
+
+.page-link, .page-link.disabled{
+    background-color: #00473e;
+    color: white;
+    border: none;
+}
+
+.page-link:hover{
+    background-color: #01423a;
+    color: white;
+    border: none;
+}
+
+   

@@ -141,7 +141,6 @@
             {% endfor %}
 
             <div class="media">
-                <!-- <img src="https://eu.ui-avatars.com/api/?rounded=true&background=a0a0a0&color=fff&name=Z" class="align-self-start mr-3" alt="..."> -->
                 <div id="card" class="container-fluid d-inline-flexcard shadow mb-3 p-3 post-comment">
                     <section id="repondre">
                         {{ form_start(form) }}
@@ -155,7 +154,7 @@
                     </section>
                 </div>
             </div>
-            <div class="pagination">
+            <div class="pagination justify-content-center">
                 {{ knp_pagination_render(comments) }}
             </div>
         </div>

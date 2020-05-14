@@ -22,13 +22,12 @@
     <div class="row">
         <!-- first -->
         <div class="col-md-3">
+            {# Party flash #}
+            {% block partyMessage %}{% include "block/_partyMessage.html.twig" %}{% endblock %}
             {% block comment %}{% include "block/_comment.html.twig" %}{% endblock %}
         </div>
-        <!-- end first -->
-
         <!-- middle -->
         <div class="col-md-6">
-
             <span>
                 <div id="btn-back" type="button" class="btn btn-circle">
                     <a id="home-button" href="{{ path('app_default') }}"><i class="fas fa-home"></i></a>
@@ -36,8 +35,7 @@
                 <span>
                     <a class="white" href="{{ path('app_default') }}">Accueil</a>
                     <span>
-                        <a id="btn-success" type="button" class="btn float-right" href="{{ path('app_forum_new') }}"><i
-                                class="fas fa-feather-alt"></i> Forum</a>
+                        <a id="btn-success" type="button" class="btn float-right" href="{{ path('app_forum_new') }}"><i class="fas fa-feather-alt"></i> Forum</a>
                     </span>
                 </span>
             </span>
@@ -50,11 +48,11 @@
                         </span>
                         <span class="float-right">
                             <a id="btn-warning" type="button" class="btn btn-circle"
-                                href="{{ path('app_forum_edit', {'slug': forum.getSlug()}) }}"><i
-                                    class="fas fa-drafting-compass"></i></a>
+                                href="{{ path('app_forum_edit', {'slug': forum.getSlug()}) }}"><i class="fas fa-drafting-compass"></i>
+                            </a>
                             <a id="btn-success" type="button" class="btn btn-circle"
-                                href="{{ path('app_category_new', {'slug': forum.getSlug()}) }}"><i
-                                    class="fas fa-plus"></i></a>
+                                href="{{ path('app_category_new', {'slug': forum.getSlug()}) }}"><i class="fas fa-plus"></i>
+                            </a>
                         </span>
                         {% if forum.getDescription() is defined and forum.getDescription() is not null %}
                         <p id="description" class="card-text">{{ forum.getDescription()|raw }}</p>
@@ -108,7 +106,7 @@
                                 </tr>
                                 {% else %}
                                 <div class="alert alert-success m-3" role="alert">
-                                    <i class="fas fa-coffee"></i></i>
+                                    <i class="fas fa-coffee"></i>
                                     <span class="p-4">
                                         Soyez la première personne à ajouter une catégorie dans ce forum !
                                     </span>
@@ -119,58 +117,16 @@
                     </div>
                 </div>
                 {% else %}
-                {% block emptyForum %}{% include "block/emptyForum.html.twig" %}{% endblock %}
+                {% block emptyForum %}{% include "block/_emptyForum.html.twig" %}{% endblock %}
                 {% endfor %}
             </div>
 
-            <a id="btn-success" type="button" class="btn float-right" href="{{ path('app_forum_new') }}"><i
-                    class="fas fa-feather-alt"></i> Forum</a>
+            <a id="btn-success" type="button" class="btn float-right" href="{{ path('app_forum_new') }}"><i class="fas fa-feather-alt"></i> Forum</a>
         </div>
-        <!-- end middle -->
-
         <!-- last -->
         <div class="col-md-3">
             {% block discord %}{% include "block/_discordIntegration.html.twig" %}{% endblock %}
         </div>
-        <!-- end last -->
+        <!-- end -->
     </div>
-
-
-
-    <!-- test -->
-    <!-- <button id="btn-success" type="button" class="btn"><i class="fas fa-check"></i> Confirmer</button>
-<button id="btn-danger" type="button" class="btn"><i class="fas fa-trash-alt"></i> Supprimer</button>
-
-<button id="btn-warning" type="button" class="btn btn-circle"><i class="fas fa-wrench"></i></button>
-<button id="btn-danger" type="button" class="btn btn-circle"><i class="fas fa-trash-alt"></i></button>
-<button id="btn-info" type="button" class="btn btn-circle"><i class="fas fa-eye"></i></button>
-<button id="btn-moderator" type="button" class="btn btn-circle"><i
-        class="fas fa-balance-scale"></i></button>
-<button id="btn-success" type="button" class="btn btn-circle"><i class="fas fa-plus"></i></button>
-
-<button id="btn-back" type="button" class="btn btn-circle"><i class="fas fa-home"></i></i></button>
-<i class="fas fa-arrow-right"></i>
-
-<br><br>
-
-<div class="alert alert-success" role="alert">
-    <i class="fas fa-check"></i> Victoire
-</div>
-<div class="alert alert-danger" role="alert">
-    <span>
-        <i class="fas fa-bullhorn"></i>
-        <span class="p-4">
-            Partie du 11 Mai - Inscrivez vous dès maintenant !
-        </span>
-    </span>
-</div>
-</div> -->
-    <!-- end test -->
-
-
-    {% endblock %}
-
-    {% block javascript %}
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script></script>
     {% endblock %}
