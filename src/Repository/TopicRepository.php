@@ -77,9 +77,10 @@ class TopicRepository extends ServiceEntityRepository
         $entityManager = $this->getEntityManager();
 
         $queryBuilder = $entityManager->createQueryBuilder()
-            ->select('comment.createdAt, comment.content, comment.author') 
+            ->select('comment.createdAt, comment.content, comment.author, user.pseudo') 
             ->from(Topic::class, 'topic')
             ->leftJoin('topic.comments', 'comment')
+            ->innerJoin('comment.user', 'user')
             ->where('topic.category = :category')
             ->setParameter('category', $category)
             ->orderBy('comment.id', 'DESC')
