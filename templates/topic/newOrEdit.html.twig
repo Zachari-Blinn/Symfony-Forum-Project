@@ -18,30 +18,33 @@
   --                  ░░░░░░                                                          
   -->
 
-<br>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
             <div id="card" class="card shadow mb-3 p-3">
                 <h3>Ajouter Sujet</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, minima aliquam corrupti praesentium placeat vero dolorem repellat vitae. Labore tempora perferendis officiis quisquam aperiam modi voluptatibus molestias voluptates obcaecati veniam?</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsam, minima aliquam corrupti praesentium
+                    placeat vero dolorem repellat vitae. Labore tempora perferendis officiis quisquam aperiam modi
+                    voluptatibus molestias voluptates obcaecati veniam?</p>
                 {{ form_start(form) }}
                 {{ form_errors(form) }}
-        
+
                 {{ form_rest(form) }}
-                <span>
-                    <a id="btn-back" type="button" class="btn float-left btn-circle" href="{{ path('app_default') }}"><i class="fas fa-arrow-left"></i></a>
-                    <span>
-                        <button id="btn-success" type="submit" class="btn float-right"><i class="fas fa-check"></i> Ajouter</button>
-                    </span>
-                    <a id="btn-danger" type="button" class="btn float-right" href="#"><i class="fas fa-trash-alt"></i> Supprimer</a>
-                </span>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9">
+                            <a id="btn-back" type="button" class="btn float-left btn-circle" href="{{ path('app_default') }}"><i class="fas fa-arrow-left"></i></a>
+                        </div>
+                        <div class="col-md-3">
+                            <button id="btn-success" type="submit" class="btn float-right"><i class="fas fa-check"></i>Ajouter</button>
+                            <a id="btn-danger" type="button" class="btn float-right" href="#"><i class="fas fa-trash-alt"></i>Supprimer</a>
+                        </div>
+                    </div>
+                </div>
                 {{ form_end(form) }}
             </div>
         </div>
-      </div>
+    </div>
 </div>
 
 {% endblock %}
-
-

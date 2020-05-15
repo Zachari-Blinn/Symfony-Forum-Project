@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\User;
 use App\Entity\Topic;
 use App\Entity\Category;
+use App\Entity\Comment;
 use Doctrine\Persistence\ManagerRegistry;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
@@ -47,10 +48,10 @@ class TopicRepository extends ServiceEntityRepository
     /**
      * Find all topics order by newest
      *
-     * @param Category|null $category
+     * @param Category $category
      * @return Topic|null
      */ 
-    public function findAllTopicByNewest(?Category $category): array
+    public function findAllTopicByNewest(Category $category): array
     {
         return $this->createQueryBuilder('topic')
             ->select('topic')
@@ -62,6 +63,31 @@ class TopicRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    /**
+     * Get last post in category parameter
+     * 
+     * @param Category $category
+     * @return Comment|null
+     */
+    public function findLastPost(Category $category): ?array
+    {
+        // TODO REPLACE TOPIC BY POST
+        $entityManager = $this->getEntityManager();
+
+        $queryBuilder = $entityManager->createQueryBuilder()
+            ->select('comment.createdAt, comment.content, comment.author') 
+            ->from(Topic::class, 'topic')
+            ->leftJoin('topic.comments', 'comment')
+            ->where('topic.category = :category')
+            ->setParameter('category', $category)
+            ->orderBy('comment.id', 'DESC')
+            ->setMaxResults(1);
+ 
+         $query = $queryBuilder->getQuery();
+
+        return $query->getOneOrNullResult();
     }
 
 }

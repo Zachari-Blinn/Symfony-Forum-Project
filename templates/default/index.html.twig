@@ -100,6 +100,17 @@
                                             </td>
                                             <td class="col-4">
                                                 <!-- TODO -->
+                                                {% set post = lastPost(category) %}
+                                                {% if post is not null %}
+                                                <div id="last_post_card">
+                                                    <div id="last_post_header">
+                                                        <h6 class="card-title"><img src="https://eu.ui-avatars.com/api/?rounded=true&color=fff&size=25" class="align-self-start mr-3" alt="...">{{ post.author }}</h6>
+                                                        <p class="card-text">{{ post.content }}</p>
+                                                    </div>
+                                                </div>
+                                                {% else %}
+                                                    <p>Aucun poste</p>
+                                                {% endif %}
                                             </td>
                                         </div>
                                     </div>
