@@ -26,10 +26,6 @@ class CategoryController extends AbstractController
     {
         $data = $topicRepository->findAllTopicByNewest($category);
 
-        $test = $topicRepository->findLastPost($category);
-
-        dump($test);
-
         $topics = $paginator->paginate($data, $request->query->getInt('page', $page), 8);
 
         return $this->render('category/index.html.twig', [

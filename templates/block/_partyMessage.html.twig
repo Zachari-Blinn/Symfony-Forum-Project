@@ -7,7 +7,7 @@
                     <i class="fas fa-bullhorn"></i>
                 </div>
                 <div id="text_party_flash" class="col-md-11">
-                    {{ party.title }} - <a href="#">Inscrivez vous dès maintenant !</a>
+                    {{ party.title }} - <a href="{{ path('app_party_new_participate', {'id': party.id}) }}">Inscrivez vous dès maintenant !</a>
                 </div>
             </div>
         </div>

@@ -71,7 +71,7 @@ class TopicRepository extends ServiceEntityRepository
      * @param Category $category
      * @return Comment|null
      */
-    public function findLastPost(Category $category): ?array
+    public function findLastPostByCategory(Category $category): ?array
     {
         // TODO REPLACE TOPIC BY POST
         $entityManager = $this->getEntityManager();
@@ -83,6 +83,28 @@ class TopicRepository extends ServiceEntityRepository
             ->innerJoin('comment.user', 'user')
             ->where('topic.category = :category')
             ->setParameter('category', $category)
+            ->orderBy('comment.id', 'DESC')
+            ->setMaxResults(1);
+ 
+         $query = $queryBuilder->getQuery();
+
+        return $query->getOneOrNullResult();
+    }
+
+    /**
+     * Get last post in category parameter
+     * 
+     * @return Comment|null
+     */
+    public function findLast(): ?array
+    {
+        // TODO REPLACE TOPIC BY POST
+        $entityManager = $this->getEntityManager();
+
+        $queryBuilder = $entityManager->createQueryBuilder()
+            ->select('comment.createdAt, comment.content, comment.author, comment.user') 
+            ->from(Topic::class, 'topic')
+            ->leftJoin('topic.comments', 'comment')
             ->orderBy('comment.id', 'DESC')
             ->setMaxResults(1);
  

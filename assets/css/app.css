@@ -104,8 +104,9 @@ p {
     margin-bottom: 0px;
     padding-bottom: 15px;
     padding-top: 15px;
-    border-radius: 0;
     border: none;
+    border-radius: 10px;
+
 }   
 
 /* alert danger */
@@ -120,7 +121,6 @@ p {
     background-color: #01423a;
     border: #01423a!important;
     color: #ffffff;
-    border-radius: 10px;
 }
 
 /* alert info */
@@ -337,7 +337,7 @@ div.col-md-1:nth-child(2) {
    
 #icon_party_flash {
     padding-left: 0px;
-    margin-top: 11px;
+    margin-top: 0px;
 }
 
 #text_party_flash {
@@ -363,3 +363,8 @@ div.col-md-1:nth-child(2) {
 .card-title {
     margin-bottom: 0;
 }
+
+.navigation-path {
+    margin-bottom: 20px;
+}
+   

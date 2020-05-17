@@ -25,7 +25,7 @@ class PartyController extends AbstractController
         // PAGINATATION TODO
 
         return $this->render('party/index.html.twig', [
-            'party' => $partyRepository->findAll(),
+            'parties' => $partyRepository->findAll(),
         ]);
     }
 
@@ -71,10 +71,10 @@ class PartyController extends AbstractController
     /**
      * New or edit participate at party
      * 
-     * @Route("/party/participate/new/{party}", name="app_party_new_participate", methods={"GET","POST"})
+     * @Route("/party/participate/new/{id}", name="app_party_new_participate", methods={"GET","POST"})
      * @Route("/party/participate/edit/{party}", name="app_party_edit_participate", methods={"GET","POST"})
      */
-    public function participate(Party $party, ParticipateRepository $participateRepository, Request $request, EntityManagerInterface $entityManager): Response
+    public function participate(Party $party , ParticipateRepository $participateRepository, Request $request, EntityManagerInterface $entityManager): Response
     {
         // $this->denyAccessUnlessGranted('PARTICIPATE', $party);
 

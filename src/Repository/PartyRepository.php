@@ -27,7 +27,7 @@ class PartyRepository extends ServiceEntityRepository
     public function findAllNextParty(): ?array
     {
         return $this->createQueryBuilder('party')
-            ->select('party.title')
+            ->select('party.title', 'party.id')
             ->andWhere('party.expireAt > :date_now')
             ->setParameter('date_now', new \DateTime())
             ->orderBy('party.partyAt', 'DESC')

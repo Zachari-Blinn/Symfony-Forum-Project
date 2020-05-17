@@ -26,13 +26,13 @@ class LastPostExtension extends AbstractExtension
     public function getFunctions(): ?array
     {
         return [
-            new TwigFunction('lastPost', [$this, 'getLastPost']),
+            new TwigFunction('lastPostByCategory', [$this, 'getLastPostByCategory']),
         ];
     }
 
-    public function getLastPost($category)
+    public function getLastPostByCategory($category)
     {
-        $post = $this->em->getRepository(Topic::class)->findLastPost($category);
+        $post = $this->em->getRepository(Topic::class)->findLastPostByCategory($category);
 
         return $post;
     }
